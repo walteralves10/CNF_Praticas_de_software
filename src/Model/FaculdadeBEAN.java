@@ -2,46 +2,40 @@ package Model;
 
 public class FaculdadeBEAN {
     
-    private int codigo_professor;
-    private String nome_professor;
-    private String cpf_professor;
-    private int status_disciplina;
+    private int codigo_faculdade;
+    private String nome_faculdade;
+    private int status_faculdade;
 
-    public FaculdadeBEAN(int codigo_professor, String nome_professor, String cpf_professor) {
-        this.codigo_professor = codigo_professor;
-        this.nome_professor = nome_professor;
-        this.cpf_professor = cpf_professor;
+    public FaculdadeBEAN(int codigo_faculdade, String nome_faculdade, int status_faculdade) {
+        this.codigo_faculdade = codigo_faculdade;
+        this.nome_faculdade = nome_faculdade;
+        this.status_faculdade = status_faculdade;
     }
 
-    public int getCodigo_professor() {
-        return codigo_professor;
+    public int getCodigo_faculdade() {
+        return codigo_faculdade;
     }
 
-    public void setCodigo_professor(int codigo_professor) {
-        this.codigo_professor = codigo_professor;
+    public void setCodigo_faculdade(int codigo_faculdade) {
+        this.codigo_faculdade = codigo_faculdade;
     }
 
-    public String getNome_professor() {
-        return nome_professor;
+    public String getNome_faculdade() {
+        return nome_faculdade;
     }
 
-    public void setNome_professor(String nome_professor) {
-        this.nome_professor = nome_professor;
+    public void setNome_faculdade(String nome_faculdade) {
+        this.nome_faculdade = nome_faculdade;
     }
 
-    public String getCpf_professor() {
-        return cpf_professor;
+    public int getStatus_faculdade() {
+        return status_faculdade;
     }
 
-    public void setCpf_professor(String cpf_professor) {
-        this.cpf_professor = cpf_professor;
+    public void setStatus_faculdade(int status_faculdade) {
+        this.status_faculdade = status_faculdade;
     }
-
-    public int getStatus_disciplina() {
-        return status_disciplina;
-    }
-
-    public void setStatus_disciplina(int status_disciplina) {
-        this.status_disciplina = status_disciplina;
-    }
+    
+    
+    
 }
