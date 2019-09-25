@@ -5,6 +5,7 @@ public class ProfessorBEAN {
     private int codigo_professor;
     private String nome_professor;
     private String cpf_professor;
+    private int status_professor; 
 
     public ProfessorBEAN(int codigo_professor, String nome_professor, String cpf_professor) {
         this.codigo_professor = codigo_professor;
@@ -30,6 +31,14 @@ public class ProfessorBEAN {
 
     public void setCpf_professor(String cpf_professor) {
         this.cpf_professor = cpf_professor;
+    }
+
+    public int getStatus_professor() {
+        return status_professor;
+    }
+
+    public void setStatus_professor(int status_professor) {
+        this.status_professor = status_professor;
     }
     
     
