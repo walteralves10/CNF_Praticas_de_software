@@ -7,10 +7,22 @@ public class ProfessorBEAN {
     private String cpf_professor;
     private int status_professor; 
 
-    public ProfessorBEAN(int codigo_professor, String nome_professor, String cpf_professor) {
+    public ProfessorBEAN(int codigo_professor) {
+        this.codigo_professor = codigo_professor;
+    }
+
+    public ProfessorBEAN(int codigo_professor, String nome_professor, String cpf_professor, int status_professor) {
         this.codigo_professor = codigo_professor;
         this.nome_professor = nome_professor;
         this.cpf_professor = cpf_professor;
+        this.status_professor = status_professor;
+    }
+    
+    public ProfessorBEAN(String nome_professor, String cpf_professor, int status_professor) {
+        //this.codigo_professor = codigo_professor;
+        this.nome_professor = nome_professor;
+        this.cpf_professor = cpf_professor;
+        this.status_professor = status_professor;
     }
 
     public int getCodigo_professor() {

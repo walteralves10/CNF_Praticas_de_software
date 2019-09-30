@@ -35,6 +35,8 @@ public class FaculdadeBEAN {
     public void setStatus_faculdade(int status_faculdade) {
         this.status_faculdade = status_faculdade;
     }
+
+    
     
     
     

@@ -31,6 +31,9 @@ public class Controle {
     public void deleteProfessor(ProfessorBEAN prof){
         ProfessorDAO.getInstance().delete(prof);
     }
+    public ArrayList<ProfessorBEAN> listaProfessores(){
+        return ProfessorDAO.getInstance().findAllProfessor();
+    }
     
     
 }
