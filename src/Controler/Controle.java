@@ -25,6 +25,9 @@ public class Controle {
     public ArrayList<UsuarioBEAN> listaUsuario(){
         return UsuarioDAO.getInstance().findAllUsuario();
     }
+    public Boolean isExist(String email, String senha){
+        return UsuarioDAO.getInstance().isExist(email, senha);
+    }
     
     public void addProfessor(ProfessorBEAN prof){
         ProfessorDAO.getInstance().create(prof);
