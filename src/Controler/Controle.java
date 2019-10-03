@@ -1,5 +1,9 @@
 package Controler;
 
+import Model.DisciplinaBEAN;
+import Model.DisciplinaDAO;
+import Model.FaculdadeBEAN;
+import Model.FaculdadeDAO;
 import Model.ProfessorBEAN;
 import Model.ProfessorDAO;
 import Model.UsuarioBEAN;
@@ -35,5 +39,29 @@ public class Controle {
         return ProfessorDAO.getInstance().findAllProfessor();
     }
     
+    public void addFaculdade(FaculdadeBEAN facul){
+        FaculdadeDAO.getInstance().create(facul);
+    }
+    public void updateFaculdade(FaculdadeBEAN facul){
+        FaculdadeDAO.getInstance().update(facul);
+    }
+    public void deleteFaculdade(FaculdadeBEAN facul){
+        FaculdadeDAO.getInstance().delete(facul);
+    }
+    public ArrayList<FaculdadeBEAN> listaFaculdades(){
+        return FaculdadeDAO.getInstance().findAllFaculdade();
+    }
     
+    public void addDisciplina(DisciplinaBEAN disc){
+        DisciplinaDAO.getInstance().create(disc);
+    }
+    public void updateDisciplina(DisciplinaBEAN disc){
+        DisciplinaDAO.getInstance().update(disc);
+    }
+    public void deleteDisciplina(DisciplinaBEAN disc){
+        DisciplinaDAO.getInstance().delete(disc);
+    }
+    public ArrayList<DisciplinaBEAN> listaDisciplinas(){
+        return DisciplinaDAO.getInstance().findAllDisciplina();
+    }
 }

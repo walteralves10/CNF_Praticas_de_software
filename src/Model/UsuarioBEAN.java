@@ -13,6 +13,12 @@ public class UsuarioBEAN {
         this.senha_usuario = senha_usuario;
     }
 
+    public UsuarioBEAN(int tipo_usuario, String senha_usuario, int status_usuario) {
+        this.tipo_usuario = tipo_usuario;
+        this.senha_usuario = senha_usuario;
+        this.status_usuario = status_usuario;
+    }
+
     public int getCodigo() {
         return codigo_usuario;
     }

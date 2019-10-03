@@ -1,39 +1,22 @@
 package view;
 
 import Controler.Controle;
-import Model.ProfessorBEAN;
-import java.util.ArrayList;
+import Model.FaculdadeBEAN;
+import Model.FaculdadeBEAN;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class Menu extends javax.swing.JFrame {
+public class Faculdade extends javax.swing.JFrame {
 
     javax.swing.table.DefaultTableModel modelo;
     Controle controle = new Controle();
 
-    public Menu() {
-
+    public Faculdade() {
         initComponents();
 
         atualizaTabela();
     }
 
-    private void atualizaTabela() {
-        this.modelo = (javax.swing.table.DefaultTableModel) tabela.getModel();
-
-        List<ProfessorBEAN> listaProfessores = controle.listaProfessores();
-        preencher_tabela(listaProfessores);
-    }
-
-    private void limpaCampos() {
-        codigo.setText("");
-        nome.setText("");
-        cpf.setText("");
-    }
-
-    /**
-     * Creates new form Menu
-     */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,48 +26,38 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cpf = new javax.swing.JTextField();
-        pesquisa = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        salvar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         novo = new javax.swing.JButton();
+        salvar = new javax.swing.JButton();
         excluir = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         status = new javax.swing.JComboBox<>();
-        codigo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        codigo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        nome = new javax.swing.JTextField();
+        pesquisa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(436, 421));
 
-        jLabel1.setText("Nome");
-
-        pesquisa.setText("Pesquisa");
-        pesquisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisaActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("CPF");
-
-        jLabel3.setText("Status");
-
-        salvar.setText("Salvar");
-        salvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarActionPerformed(evt);
-            }
-        });
+        jPanel1.setPreferredSize(new java.awt.Dimension(436, 421));
+        jPanel1.setRequestFocusEnabled(false);
 
         novo.setText("Novo");
         novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novoActionPerformed(evt);
+            }
+        });
+
+        salvar.setText("Salvar");
+        salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarActionPerformed(evt);
             }
         });
 
@@ -104,13 +77,13 @@ public class Menu extends javax.swing.JFrame {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "id", "Nome", "CPF"
+                "id", "Nome"
             }
         ));
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,25 +95,33 @@ public class Menu extends javax.swing.JFrame {
 
         status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVADO", "DESATIVADO" }));
 
+        jLabel3.setText("Status");
+
         jLabel4.setText("ID");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jLabel1.setText("Nome");
+
+        pesquisa.setText("Pesquisa");
+        pesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(novo)
                         .addGap(18, 18, 18)
                         .addComponent(salvar)
@@ -148,43 +129,39 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(excluir)
                         .addGap(32, 32, 32)
                         .addComponent(cancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(pesquisa)))))
                 .addGap(0, 43, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pesquisa)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar)
                     .addComponent(excluir)
                     .addComponent(cancelar)
@@ -192,46 +169,89 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(72, 72, 72))
         );
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-
-    }//GEN-LAST:event_pesquisaActionPerformed
-
-    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()));
-        controle.deleteProfessor(professores);
-    }//GEN-LAST:event_excluirActionPerformed
-
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        int linhaEditora = tabela.getSelectedRow();
-        this.codigo.setText(tabela.getValueAt(linhaEditora, 0).toString());
-        this.nome.setText(tabela.getValueAt(linhaEditora, 1).toString());
-        this.cpf.setText(tabela.getValueAt(linhaEditora, 2).toString());
-        // this.status.setText(tabela.getValueAt(linhaEditora, 3).toString());
-
-
-    }//GEN-LAST:event_tabelaMouseClicked
-
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        limpaCampos();
-    }//GEN-LAST:event_cancelarActionPerformed
-
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN( nome.getText(), cpf.getText(), 0);
-        controle.addProfessor(professores);
+        FaculdadeBEAN faculdade = new FaculdadeBEAN(nome.getText(), 0);
+        controle.addFaculdade(faculdade);
         atualizaTabela();
         limpaCampos();
     }//GEN-LAST:event_novoActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()), nome.getText(), cpf.getText(), 0);
-        controle.updateProfessor(professores);
+        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()), nome.getText(), 0);
+        controle.updateFaculdade(faculdade);
         atualizaTabela();
         limpaCampos();
     }//GEN-LAST:event_salvarActionPerformed
 
+    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
+        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()));
+        controle.deleteFaculdade(faculdade);
+    }//GEN-LAST:event_excluirActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        limpaCampos();
+    }//GEN-LAST:event_cancelarActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        int linhaEditora = tabela.getSelectedRow();
+        this.codigo.setText(tabela.getValueAt(linhaEditora, 0).toString());
+        this.nome.setText(tabela.getValueAt(linhaEditora, 1).toString());
+        //this.cpf.setText(tabela.getValueAt(linhaEditora, 2).toString());
+        // this.status.setText(tabela.getValueAt(linhaEditora, 3).toString());
+
+    }//GEN-LAST:event_tabelaMouseClicked
+
+    private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
+        
+    }//GEN-LAST:event_pesquisaActionPerformed
+
+    
+    private void atualizaTabela() {
+        this.modelo = (javax.swing.table.DefaultTableModel) tabela.getModel();
+
+        List<FaculdadeBEAN> listaFaculdades = controle.listaFaculdades();
+        preencher_tabela(listaFaculdades);
+    }
+
+    private void limpaCampos() {
+        codigo.setText("");
+        nome.setText("");
+    }
+    
+    public void preencher_tabela(List<FaculdadeBEAN> listProfessores) {
+
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(500);
+        //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
+        //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
+
+        modelo.setNumRows(0);
+        try {
+            for (FaculdadeBEAN facul : listProfessores) {
+                modelo.addRow(new Object[]{facul.getCodigo_faculdade(), facul.getNome_faculdade()});
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -249,20 +269,20 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Faculdade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Faculdade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Faculdade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Faculdade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new Faculdade().setVisible(true);
             }
         });
     }
@@ -270,12 +290,11 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField codigo;
-    private javax.swing.JTextField cpf;
     private javax.swing.JButton excluir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nome;
     private javax.swing.JButton novo;
@@ -284,20 +303,4 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
-public void preencher_tabela(List<ProfessorBEAN> listProfessores) {
-
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
-        //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
-
-        modelo.setNumRows(0);
-        try {
-            for (ProfessorBEAN prof : listProfessores) {
-                modelo.addRow(new Object[]{prof.getCodigo_professor(), prof.getNome_professor(), prof.getCpf_professor()});
-            }
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
-        }
-    }
 }

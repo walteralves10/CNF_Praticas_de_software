@@ -6,8 +6,17 @@ public class FaculdadeBEAN {
     private String nome_faculdade;
     private int status_faculdade;
 
+    public FaculdadeBEAN(int codigo_faculdade) {
+        this.codigo_faculdade = codigo_faculdade;
+    }
+
     public FaculdadeBEAN(int codigo_faculdade, String nome_faculdade, int status_faculdade) {
         this.codigo_faculdade = codigo_faculdade;
+        this.nome_faculdade = nome_faculdade;
+        this.status_faculdade = status_faculdade;
+    }
+
+    public FaculdadeBEAN(String nome_faculdade, int status_faculdade) {
         this.nome_faculdade = nome_faculdade;
         this.status_faculdade = status_faculdade;
     }

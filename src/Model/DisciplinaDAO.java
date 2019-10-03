@@ -1,0 +1,67 @@
+package Model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class DisciplinaDAO {
+    
+    private static DisciplinaDAO instance;
+    private static final int DESATIVADO = 1;
+    private static final int ATIVOS = 0;
+    
+    public DisciplinaDAO() {
+        MySQLDAO.getConnection();
+    }
+    
+    public static DisciplinaDAO getInstance(){
+        if(instance == null){
+            instance = new DisciplinaDAO();
+        }
+        return instance;
+    }
+    
+    public long create(DisciplinaBEAN disc){
+        String query = "INSERT INTO disciplina(nome_disciplina, carga_horaria_disciplina, "
+                + "fk_codigo_faculdade, status_disciplina) VALUES (?,?,?,?)";
+        return MySQLDAO.executeQuery(query, disc.getNome_disciplina(), disc.getCarga_horaria_disciplina(),
+                disc.getFk_codigo_faculdade(), disc.getStatus_disciplina());
+    }
+    
+    public void update(DisciplinaBEAN disc){
+        String query = "UPDATE disciplina SET nome_disciplina= ?,carga_horaria_disciplina= ?"
+                + ",fk_codigo_faculdade= ?,status_disciplina= ? WHERE codigo_disciplina = ?";
+        MySQLDAO.executeQuery(query, disc.getNome_disciplina(), disc.getCarga_horaria_disciplina(),
+                disc.getFk_codigo_faculdade(), disc.getStatus_disciplina(), disc.getCodigo_disciplina());
+    }
+    
+    public void delete(DisciplinaBEAN disc){
+        MySQLDAO.executeQuery("UPDATE disciplina SET status_disciplina= "+ DESATIVADO +" "
+                + "WHERE codigo_disciplina = ?", disc.getCodigo_disciplina());
+    }
+    
+    public ArrayList<DisciplinaBEAN> findAllDisciplina() {
+        return listaDisciplinas("SELECT * FROM faculdade WHERE status_faculdade = "+ATIVOS+" "
+                + "ORDER BY nome_professor");
+    }
+
+    public ArrayList<DisciplinaBEAN> listaDisciplinas(String query) {
+        ArrayList<DisciplinaBEAN> lista = new ArrayList<DisciplinaBEAN>();
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet(query);
+        try {
+            while (rs.next()) {
+                lista.add(new DisciplinaBEAN(rs.getInt("codigo_disciplina"), 
+                                            rs.getString("nome_disciplina"),
+                                            rs.getInt("carga_horaria_disciplina"),
+                                            rs.getInt("fk_codigo_faculdade"),
+                                            rs.getInt("status_faculdade")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+}
