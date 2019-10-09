@@ -44,6 +44,11 @@ public class Usuario extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(436, 421));
 
         jButton1.setText("Sair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         entrar.setText("Entrar");
         entrar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +58,11 @@ public class Usuario extends javax.swing.JFrame {
         });
 
         cadastrar.setText("Cadastrar-se");
+        cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Login");
 
@@ -128,6 +138,14 @@ public class Usuario extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_entrarActionPerformed
+
+    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
+        new ManterUsuario().setVisible(true);
+    }//GEN-LAST:event_cadastrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

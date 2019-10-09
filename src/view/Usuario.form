@@ -107,6 +107,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="entrar">
           <Properties>
@@ -120,6 +123,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastrar-se"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cadastrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="senha">
         </Component>

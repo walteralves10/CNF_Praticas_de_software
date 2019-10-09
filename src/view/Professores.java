@@ -221,6 +221,7 @@ public class Professores extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        new Menu().setVisible(true);
         limpaCampos();
     }//GEN-LAST:event_cancelarActionPerformed
 
