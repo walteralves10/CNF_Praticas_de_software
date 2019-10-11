@@ -38,8 +38,8 @@ public class FaculdadeDAO {
     }
     
         public ArrayList<FaculdadeBEAN> findAllFaculdade() {
-        return listaFaculdades("SELECT * FROM faculdade WHERE status_faculdade = "+ATIVOS+" "
-                + "ORDER BY nome_faculdade");
+        return listaFaculdades("SELECT * FROM faculdade  "
+                + "ORDER BY codigo_faculdade");//WHERE status_faculdade = "+ATIVOS+"
     }
 
     public ArrayList<FaculdadeBEAN> listaFaculdades(String query) {
@@ -58,5 +58,22 @@ public class FaculdadeDAO {
         }
         return lista;
     }
-    
+ 
+    //listaStatusFaculdade
+    public FaculdadeBEAN listaStatusFaculdade(int codigo){
+        FaculdadeBEAN result = null;
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM faculdade WHERE codigo_faculdade="+codigo);
+        try {
+            while (rs.next()) {
+                result = (new FaculdadeBEAN(rs.getInt("codigo_faculdade"), 
+                                            rs.getString("nome_faculdade"), 
+                                            rs.getInt("status_faculdade")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }    
 }

@@ -23,6 +23,7 @@ public class Professores extends javax.swing.JFrame {
 
         List<ProfessorBEAN> listaProfessores = controle.listaProfessores();
         preencher_tabela(listaProfessores);
+        codigo.setEnabled(false);
     }
 
     private void limpaCampos() {
@@ -105,10 +106,7 @@ public class Professores extends javax.swing.JFrame {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "id", "Nome", "CPF"
@@ -216,6 +214,13 @@ public class Professores extends javax.swing.JFrame {
         this.nome.setText(tabela.getValueAt(linhaEditora, 1).toString());
         this.cpf.setText(tabela.getValueAt(linhaEditora, 2).toString());
         // this.status.setText(tabela.getValueAt(linhaEditora, 3).toString());
+        ProfessorBEAN listaProfessores
+                = controle.listaStatusProfessor(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
+        if (listaProfessores.getStatus_professor() == 0) {
+            this.status.setSelectedIndex(0);
+        } else {
+            this.status.setSelectedIndex(1);
+        }
 
 
     }//GEN-LAST:event_tabelaMouseClicked
@@ -226,7 +231,7 @@ public class Professores extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN( nome.getText(), cpf.getText(), 0);
+        ProfessorBEAN professores = new ProfessorBEAN(nome.getText(), cpf.getText(), 0);
         controle.addProfessor(professores);
         atualizaTabela();
         limpaCampos();

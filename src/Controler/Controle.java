@@ -41,6 +41,9 @@ public class Controle {
     public ArrayList<ProfessorBEAN> listaProfessores(){
         return ProfessorDAO.getInstance().findAllProfessor();
     }
+    public ProfessorBEAN listaStatusProfessor(int codigo){
+        return ProfessorDAO.getInstance().listaStatusProfessor(codigo);
+    }
     
     public void addFaculdade(FaculdadeBEAN facul){
         FaculdadeDAO.getInstance().create(facul);
@@ -54,6 +57,9 @@ public class Controle {
     public ArrayList<FaculdadeBEAN> listaFaculdades(){
         return FaculdadeDAO.getInstance().findAllFaculdade();
     }
+    public FaculdadeBEAN listaStatusFaculdade(int codigo){
+        return FaculdadeDAO.getInstance().listaStatusFaculdade(codigo);
+    }
     
     public void addDisciplina(DisciplinaBEAN disc){
         DisciplinaDAO.getInstance().create(disc);
@@ -66,5 +72,8 @@ public class Controle {
     }
     public ArrayList<DisciplinaBEAN> listaDisciplinas(){
         return DisciplinaDAO.getInstance().findAllDisciplina();
+    }
+    public DisciplinaBEAN listaStatusDisciplina(int codigo){
+        return DisciplinaDAO.getInstance().listaStatusDisciplina(codigo);
     }
 }

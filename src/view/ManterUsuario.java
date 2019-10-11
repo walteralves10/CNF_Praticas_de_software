@@ -5,11 +5,17 @@
  */
 package view;
 
+import Controler.Controle;
+import Model.UsuarioBEAN;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rezende
  */
 public class ManterUsuario extends javax.swing.JFrame {
+
+    Controle controle = new Controle();
 
     /**
      * Creates new form ManterUsuario
@@ -51,6 +57,11 @@ public class ManterUsuario extends javax.swing.JFrame {
         jLabel4.setText("Email");
 
         cadastrar.setText("Cadastrar");
+        cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarActionPerformed(evt);
+            }
+        });
 
         voltar.setText("Voltar");
         voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +145,24 @@ public class ManterUsuario extends javax.swing.JFrame {
         new Usuario().setVisible(true);
     }//GEN-LAST:event_voltarActionPerformed
 
+    private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
+        if (senha.getText().equals(confirmaSenha.getText())) {
+            UsuarioBEAN user = new UsuarioBEAN(email.getText(), senha.getText(), 0);
+            controle.addUsuario(user);
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Senhas Diferentes!");
+            senha.setText("");
+            confirmaSenha.setText("");
+        }
+
+    }//GEN-LAST:event_cadastrarActionPerformed
+
+    public void limparCampos() {
+        email.setText("");
+        senha.setText("");
+        confirmaSenha.setText("");
+    }
     /**
      * @param args the command line arguments
      */

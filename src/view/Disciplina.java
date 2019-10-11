@@ -2,6 +2,7 @@ package view;
 
 import Controler.Controle;
 import Model.DisciplinaBEAN;
+import Model.FaculdadeBEAN;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -13,14 +14,13 @@ public class Disciplina extends javax.swing.JFrame {
 
     javax.swing.table.DefaultTableModel modelo;
     Controle controle = new Controle();
-    
+
     public Disciplina() {
         initComponents();
-        
+
         atualizaTabela();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,7 +40,7 @@ public class Disciplina extends javax.swing.JFrame {
         excluir = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        cargahoraria = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         faculdadeCombo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -66,13 +66,10 @@ public class Disciplina extends javax.swing.JFrame {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "id", "Nome", "Faculdade"
+                "id", "Nome"
             }
         ));
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,7 +143,7 @@ public class Disciplina extends javax.swing.JFrame {
                                 .addComponent(pesquisa))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(cargahoraria)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +177,7 @@ public class Disciplina extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cargahoraria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(faculdadeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
@@ -214,27 +211,48 @@ public class Disciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-
+        DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()));
+        controle.deleteDisciplina(disc);
+        atualizaTabela();
+        limpaCampos();
     }//GEN-LAST:event_excluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-
+        DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()),nome.getText(), Integer.parseInt(cargahoraria.getText()), 
+                faculdadeCombo.getSelectedIndex()+1, 0);
+        controle.updateDisciplina(disc);
         atualizaTabela();
         limpaCampos();
     }//GEN-LAST:event_salvarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-
+        DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()), 
+                faculdadeCombo.getSelectedIndex()+1, 0);
+        controle.addDisciplina(disc);
         atualizaTabela();
         limpaCampos();
     }//GEN-LAST:event_novoActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         int linhaEditora = tabela.getSelectedRow();
+        
+        DisciplinaBEAN listaDisciplina
+                = controle.listaStatusDisciplina(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
+        FaculdadeBEAN listaFaculdades 
+                = controle.listaStatusFaculdade(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
+        
         this.codigo.setText(tabela.getValueAt(linhaEditora, 0).toString());
         this.nome.setText(tabela.getValueAt(linhaEditora, 1).toString());
         //this.cpf.setText(tabela.getValueAt(linhaEditora, 2).toString());
         // this.status.setText(tabela.getValueAt(linhaEditora, 3).toString());
+
+        if (listaDisciplina.getStatus_disciplina() == 0) {
+            this.status.setSelectedIndex(0);
+        } else {
+            this.status.setSelectedIndex(1);
+        }
+        this.cargahoraria.setText(String.valueOf(listaDisciplina.getCarga_horaria_disciplina()));
+        this.faculdadeCombo.setSelectedItem(listaFaculdades.getNome_faculdade());
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
@@ -278,34 +296,50 @@ public class Disciplina extends javax.swing.JFrame {
     private void limpaCampos() {
         codigo.setText("");
         nome.setText("");
+        cargahoraria.setText("");
     }
-    
+
     public void preencher_tabela(List<DisciplinaBEAN> listDisciplinas) {
 
         tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
+        //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
         //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
 
         modelo.setNumRows(0);
         try {
             for (DisciplinaBEAN disc : listDisciplinas) {
-                modelo.addRow(new Object[]{disc.getCodigo_disciplina(), disc.getNome_disciplina(), disc.getFk_codigo_faculdade()});
+                modelo.addRow(new Object[]{disc.getCodigo_disciplina(), disc.getNome_disciplina()});
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
         }
     }
     
+    private void preencher_comboBox(List<FaculdadeBEAN> listaFaculdades){
+        try {
+            for (FaculdadeBEAN facul : listaFaculdades) {
+                faculdadeCombo.addItem(facul.getNome_faculdade());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + e);
+        }
+    }
+
     private void atualizaTabela() {
         this.modelo = (javax.swing.table.DefaultTableModel) tabela.getModel();
 
         List<DisciplinaBEAN> listaDisciplinas = controle.listaDisciplinas();
         preencher_tabela(listaDisciplinas);
+        
+        List<FaculdadeBEAN> listaFaculdades = controle.listaFaculdades();
+        preencher_comboBox(listaFaculdades);
+        codigo.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
+    private javax.swing.JTextField cargahoraria;
     private javax.swing.JTextField codigo;
     private javax.swing.JButton excluir;
     private javax.swing.JComboBox<String> faculdadeCombo;
@@ -317,7 +351,6 @@ public class Disciplina extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nome;
     private javax.swing.JButton novo;
     private javax.swing.JButton pesquisa;

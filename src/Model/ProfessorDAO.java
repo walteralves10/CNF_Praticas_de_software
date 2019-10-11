@@ -41,8 +41,8 @@ public class ProfessorDAO {
     }
     
     public ArrayList<ProfessorBEAN> findAllProfessor() {
-        return listaProfessores("SELECT * FROM professor WHERE status_professor = "+ATIVOS+" "
-                + "ORDER BY nome_professor");
+        return listaProfessores("SELECT * FROM professor  "
+                + "ORDER BY nome_professor");//WHERE status_professor = "+ATIVOS+"
     }
 
     public ArrayList<ProfessorBEAN> listaProfessores(String query) {
@@ -62,5 +62,23 @@ public class ProfessorDAO {
         }
         return lista;
     }
-
+    
+    //listaStatusProfessor
+    public ProfessorBEAN listaStatusProfessor(int codigo){
+        ProfessorBEAN result = null;
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM professor WHERE codigo_professor="+codigo);
+        try {
+            while (rs.next()) {
+                result = (new ProfessorBEAN(rs.getInt("codigo_professor"), 
+                                            rs.getString("nome_professor"), 
+                                            rs.getString("cpf_professor"), 
+                                            rs.getInt("status_professor")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

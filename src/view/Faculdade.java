@@ -77,10 +77,7 @@ public class Faculdade extends javax.swing.JFrame {
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "id", "Nome"
@@ -146,7 +143,7 @@ public class Faculdade extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(35, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +165,7 @@ public class Faculdade extends javax.swing.JFrame {
                 .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar)
                     .addComponent(excluir)
@@ -225,26 +222,33 @@ public class Faculdade extends javax.swing.JFrame {
         this.nome.setText(tabela.getValueAt(linhaEditora, 1).toString());
         //this.cpf.setText(tabela.getValueAt(linhaEditora, 2).toString());
         // this.status.setText(tabela.getValueAt(linhaEditora, 3).toString());
+        FaculdadeBEAN listaFaculdade
+                = controle.listaStatusFaculdade(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
+        if (listaFaculdade.getStatus_faculdade() == 0) {
+            this.status.setSelectedIndex(0);
+        } else {
+            this.status.setSelectedIndex(1);
+        }
 
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-        
+
     }//GEN-LAST:event_pesquisaActionPerformed
 
-    
     private void atualizaTabela() {
         this.modelo = (javax.swing.table.DefaultTableModel) tabela.getModel();
 
         List<FaculdadeBEAN> listaFaculdades = controle.listaFaculdades();
         preencher_tabela(listaFaculdades);
+        codigo.setEnabled(false);
     }
 
     private void limpaCampos() {
         codigo.setText("");
         nome.setText("");
     }
-    
+
     public void preencher_tabela(List<FaculdadeBEAN> listProfessores) {
 
         tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
