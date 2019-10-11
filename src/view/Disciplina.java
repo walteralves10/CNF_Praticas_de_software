@@ -218,16 +218,27 @@ public class Disciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_excluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()),nome.getText(), Integer.parseInt(cargahoraria.getText()), 
-                faculdadeCombo.getSelectedIndex()+1, 0);
+        DisciplinaBEAN listaDisciplina
+                = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
+        FaculdadeBEAN listaUnicaFaculdade
+                = controle.listaStatusFaculdade(listaDisciplina.getFk_codigo_faculdade());
+
+        DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()), nome.getText(), Integer.parseInt(cargahoraria.getText()),
+                listaUnicaFaculdade.getCodigo_faculdade(), status.getSelectedIndex());
+        
         controle.updateDisciplina(disc);
         atualizaTabela();
         limpaCampos();
     }//GEN-LAST:event_salvarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()), 
-                faculdadeCombo.getSelectedIndex()+1, 0);
+        DisciplinaBEAN listaDisciplina
+                = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
+        FaculdadeBEAN listaUnicaFaculdade
+                = controle.listaStatusFaculdade(listaDisciplina.getFk_codigo_faculdade());
+        
+        DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()),
+                listaUnicaFaculdade.getCodigo_faculdade(), 0);
         controle.addDisciplina(disc);
         atualizaTabela();
         limpaCampos();
@@ -235,24 +246,24 @@ public class Disciplina extends javax.swing.JFrame {
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         int linhaEditora = tabela.getSelectedRow();
-        
-        DisciplinaBEAN listaDisciplina
-                = controle.listaStatusDisciplina(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
-        FaculdadeBEAN listaFaculdades 
-                = controle.listaStatusFaculdade(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
-        
+
         this.codigo.setText(tabela.getValueAt(linhaEditora, 0).toString());
         this.nome.setText(tabela.getValueAt(linhaEditora, 1).toString());
+
+        DisciplinaBEAN listaDisciplina
+                = controle.listaStatusDisciplina(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
+        FaculdadeBEAN listaUnicaFaculdade
+                = controle.listaStatusFaculdade(listaDisciplina.getFk_codigo_faculdade());
+
         //this.cpf.setText(tabela.getValueAt(linhaEditora, 2).toString());
         // this.status.setText(tabela.getValueAt(linhaEditora, 3).toString());
-
         if (listaDisciplina.getStatus_disciplina() == 0) {
             this.status.setSelectedIndex(0);
         } else {
             this.status.setSelectedIndex(1);
         }
         this.cargahoraria.setText(String.valueOf(listaDisciplina.getCarga_horaria_disciplina()));
-        this.faculdadeCombo.setSelectedItem(listaFaculdades.getNome_faculdade());
+        this.faculdadeCombo.setSelectedItem(listaUnicaFaculdade.getNome_faculdade());
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
@@ -315,8 +326,8 @@ public class Disciplina extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
         }
     }
-    
-    private void preencher_comboBox(List<FaculdadeBEAN> listaFaculdades){
+
+    private void preencher_comboBox(List<FaculdadeBEAN> listaFaculdades) {
         try {
             for (FaculdadeBEAN facul : listaFaculdades) {
                 faculdadeCombo.addItem(facul.getNome_faculdade());
@@ -331,7 +342,7 @@ public class Disciplina extends javax.swing.JFrame {
 
         List<DisciplinaBEAN> listaDisciplinas = controle.listaDisciplinas();
         preencher_tabela(listaDisciplinas);
-        
+
         List<FaculdadeBEAN> listaFaculdades = controle.listaFaculdades();
         preencher_comboBox(listaFaculdades);
         codigo.setEnabled(false);

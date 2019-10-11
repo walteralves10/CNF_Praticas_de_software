@@ -41,8 +41,8 @@ public class ProfessorDAO {
     }
     
     public ArrayList<ProfessorBEAN> findAllProfessor() {
-        return listaProfessores("SELECT * FROM professor  "
-                + "ORDER BY nome_professor");//WHERE status_professor = "+ATIVOS+"
+        return listaProfessores("SELECT * FROM professor WHERE status_professor = "+ATIVOS+" "
+                + "ORDER BY nome_professor");//
     }
 
     public ArrayList<ProfessorBEAN> listaProfessores(String query) {

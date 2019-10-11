@@ -200,7 +200,8 @@ public class Faculdade extends javax.swing.JFrame {
     }//GEN-LAST:event_novoActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()), nome.getText(), 0);
+        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()), 
+                nome.getText(), status.getSelectedIndex());
         controle.updateFaculdade(faculdade);
         atualizaTabela();
         limpaCampos();
@@ -209,6 +210,8 @@ public class Faculdade extends javax.swing.JFrame {
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
         FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()));
         controle.deleteFaculdade(faculdade);
+        atualizaTabela();
+        limpaCampos();        
     }//GEN-LAST:event_excluirActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
@@ -251,8 +254,8 @@ public class Faculdade extends javax.swing.JFrame {
 
     public void preencher_tabela(List<FaculdadeBEAN> listProfessores) {
 
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(900);
         //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
         //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
 

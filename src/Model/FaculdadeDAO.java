@@ -38,8 +38,8 @@ public class FaculdadeDAO {
     }
     
         public ArrayList<FaculdadeBEAN> findAllFaculdade() {
-        return listaFaculdades("SELECT * FROM faculdade  "
-                + "ORDER BY codigo_faculdade");//WHERE status_faculdade = "+ATIVOS+"
+        return listaFaculdades("SELECT * FROM faculdade WHERE status_faculdade = "+ATIVOS+" "
+                + "ORDER BY codigo_faculdade");//
     }
 
     public ArrayList<FaculdadeBEAN> listaFaculdades(String query) {

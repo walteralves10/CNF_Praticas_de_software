@@ -206,6 +206,8 @@ public class Professores extends javax.swing.JFrame {
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
         ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()));
         controle.deleteProfessor(professores);
+        atualizaTabela();
+        limpaCampos();        
     }//GEN-LAST:event_excluirActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
@@ -238,7 +240,8 @@ public class Professores extends javax.swing.JFrame {
     }//GEN-LAST:event_novoActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()), nome.getText(), cpf.getText(), 0);
+        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()), 
+                nome.getText(), cpf.getText(), status.getSelectedIndex());
         controle.updateProfessor(professores);
         atualizaTabela();
         limpaCampos();
