@@ -7,6 +7,10 @@ public class ProfessorBEAN {
     private String cpf_professor;
     private int status_professor; 
 
+    public ProfessorBEAN() {
+    }
+    
+
     public ProfessorBEAN(int codigo_professor) {
         this.codigo_professor = codigo_professor;
     }

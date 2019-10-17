@@ -102,4 +102,24 @@ public class DisciplinaDAO {
         }
         return result;
     }     
+    
+    public ArrayList<DisciplinaBEAN> listaDisciplinaPorNome(DisciplinaBEAN disc){
+        ArrayList<DisciplinaBEAN> lista = new ArrayList<DisciplinaBEAN>();
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM disciplina "
+                + "WHERE nome_disciplina LIKE '%"+disc.getNome_disciplina()+"%'");
+        try {
+            while (rs.next()) {
+                lista.add(new DisciplinaBEAN(rs.getInt("codigo_disciplina"), 
+                                            rs.getString("nome_disciplina"),
+                                            rs.getInt("carga_horaria_disciplina"),
+                                            rs.getInt("fk_codigo_faculdade"),
+                                            rs.getInt("status_disciplina")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

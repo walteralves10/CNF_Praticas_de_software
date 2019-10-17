@@ -200,7 +200,18 @@ public class Professores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-
+        
+        ProfessorBEAN prof = new ProfessorBEAN();
+        prof.setNome_professor(nome.getText());
+        
+        ArrayList<ProfessorBEAN> listProfessor = controle.listaProfessorPorNome(prof);        
+        
+        if(listProfessor.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Professor não encontrada!");
+        }else{
+            preencher_tabela(listProfessor);
+        }
+        
     }//GEN-LAST:event_pesquisaActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed

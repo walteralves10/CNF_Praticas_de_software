@@ -81,4 +81,22 @@ public class ProfessorDAO {
         }
         return result;
     }
+    
+    public ArrayList<ProfessorBEAN> listaProfessorPorNome(ProfessorBEAN prof){
+        ArrayList<ProfessorBEAN> lista = new ArrayList<ProfessorBEAN>();
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM professor WHERE nome_professor LIKE '%"+prof.getNome_professor()+"%'");
+        try {
+            while (rs.next()) {
+                lista.add(new ProfessorBEAN(rs.getInt("codigo_professor"), 
+                                            rs.getString("nome_professor"), 
+                                            rs.getString("cpf_professor"), 
+                                            rs.getInt("status_professor")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

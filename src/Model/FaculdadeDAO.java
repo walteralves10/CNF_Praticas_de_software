@@ -76,4 +76,39 @@ public class FaculdadeDAO {
         }
         return result;
     }    
+    
+    public ArrayList<FaculdadeBEAN> listaFaculdadesPorNome(FaculdadeBEAN facul){
+        ArrayList<FaculdadeBEAN> lista = new ArrayList<FaculdadeBEAN>();
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM faculdade WHERE nome_faculdade LIKE '%"+facul.getNome_faculdade()+"%'");
+        try {
+            while (rs.next()) {
+                lista.add(new FaculdadeBEAN(rs.getInt("codigo_faculdade"), 
+                                            rs.getString("nome_faculdade"), 
+                                            rs.getInt("status_faculdade")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    //unicaFaculdade
+    public FaculdadeBEAN unicaFaculdade(FaculdadeBEAN facul){
+        FaculdadeBEAN lista = null;
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM faculdade WHERE nome_faculdade = '"+facul.getNome_faculdade()+"'");
+        try {
+            while (rs.next()) {
+                lista = (new FaculdadeBEAN(rs.getInt("codigo_faculdade"), 
+                                            rs.getString("nome_faculdade"), 
+                                            rs.getInt("status_faculdade")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

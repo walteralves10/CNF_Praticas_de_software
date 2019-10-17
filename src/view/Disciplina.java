@@ -3,6 +3,7 @@ package view;
 import Controler.Controle;
 import Model.DisciplinaBEAN;
 import Model.FaculdadeBEAN;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -218,10 +219,9 @@ public class Disciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_excluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        DisciplinaBEAN listaDisciplina
-                = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
-        FaculdadeBEAN listaUnicaFaculdade
-                = controle.listaStatusFaculdade(listaDisciplina.getFk_codigo_faculdade());
+        FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
+        listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
+        listaUnicaFaculdade = controle.unicaFaculdade(listaUnicaFaculdade);
 
         DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()), nome.getText(), Integer.parseInt(cargahoraria.getText()),
                 listaUnicaFaculdade.getCodigo_faculdade(), status.getSelectedIndex());
@@ -232,10 +232,12 @@ public class Disciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        DisciplinaBEAN listaDisciplina
-                = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
-        FaculdadeBEAN listaUnicaFaculdade
-                = controle.listaStatusFaculdade(listaDisciplina.getFk_codigo_faculdade());
+        //DisciplinaBEAN listaDisciplina
+          //      = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
+        
+        FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
+        listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
+        listaUnicaFaculdade = controle.unicaFaculdade(listaUnicaFaculdade);
         
         DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()),
                 listaUnicaFaculdade.getCodigo_faculdade(), 0);
@@ -267,7 +269,16 @@ public class Disciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-
+        DisciplinaBEAN disc = new DisciplinaBEAN();
+        disc.setNome_disciplina(nome.getText());
+        
+        ArrayList<DisciplinaBEAN> listDisciplina = controle.listaDisciplinaPorNome(disc);        
+        
+        if(listDisciplina.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Disciplina não encontrada!");
+        }else{
+            preencher_tabela(listDisciplina);
+        }
     }//GEN-LAST:event_pesquisaActionPerformed
 
     /**
@@ -328,7 +339,9 @@ public class Disciplina extends javax.swing.JFrame {
     }
 
     private void preencher_comboBox(List<FaculdadeBEAN> listaFaculdades) {
+        faculdadeCombo.removeAllItems();
         try {
+            
             for (FaculdadeBEAN facul : listaFaculdades) {
                 faculdadeCombo.addItem(facul.getNome_faculdade());
             }

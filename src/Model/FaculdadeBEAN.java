@@ -6,6 +6,9 @@ public class FaculdadeBEAN {
     private String nome_faculdade;
     private int status_faculdade;
 
+    public FaculdadeBEAN() {
+    }
+
     public FaculdadeBEAN(int codigo_faculdade) {
         this.codigo_faculdade = codigo_faculdade;
     }

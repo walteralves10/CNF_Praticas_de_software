@@ -8,6 +8,9 @@ public class DisciplinaBEAN {
     private int fk_codigo_faculdade;
     private int status_disciplina;
 
+    public DisciplinaBEAN() {
+    }
+    
     public DisciplinaBEAN(int codigo_disciplina) {
         this.codigo_disciplina = codigo_disciplina;
     }
