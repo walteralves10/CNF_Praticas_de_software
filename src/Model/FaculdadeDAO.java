@@ -80,7 +80,9 @@ public class FaculdadeDAO {
     public ArrayList<FaculdadeBEAN> listaFaculdadesPorNome(FaculdadeBEAN facul){
         ArrayList<FaculdadeBEAN> lista = new ArrayList<FaculdadeBEAN>();
         ResultSet rs = null;
-        rs = MySQLDAO.getResultSet("SELECT * FROM faculdade WHERE nome_faculdade LIKE '%"+facul.getNome_faculdade()+"%'");
+        rs = MySQLDAO.getResultSet("SELECT * FROM faculdade WHERE "
+                + "nome_faculdade LIKE '%"+facul.getNome_faculdade()+"%'"+""
+                        + "AND status_faculdade = "+facul.getStatus_faculdade());
         try {
             while (rs.next()) {
                 lista.add(new FaculdadeBEAN(rs.getInt("codigo_faculdade"), 

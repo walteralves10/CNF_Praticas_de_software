@@ -143,6 +143,7 @@ public class ManterUsuario extends javax.swing.JFrame {
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
         new Usuario().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_voltarActionPerformed
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed

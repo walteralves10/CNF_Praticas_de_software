@@ -45,6 +45,7 @@ public class Disciplina extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         faculdadeCombo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +113,16 @@ public class Disciplina extends javax.swing.JFrame {
 
         jLabel5.setText("Carga H.");
 
+        faculdadeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+
         jLabel6.setText("Faculdade");
+
+        jButton1.setText("limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,12 +134,14 @@ public class Disciplina extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(novo)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(salvar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(excluir)
-                        .addGap(32, 32, 32)
-                        .addComponent(cancelar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -155,7 +167,7 @@ public class Disciplina extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel6))))
-                .addGap(0, 44, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,12 +195,13 @@ public class Disciplina extends javax.swing.JFrame {
                     .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar)
                     .addComponent(excluir)
                     .addComponent(cancelar)
-                    .addComponent(novo))
+                    .addComponent(novo)
+                    .addComponent(jButton1))
                 .addGap(25, 25, 25))
         );
 
@@ -207,8 +220,9 @@ public class Disciplina extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        new Menu().setVisible(true);
         limpaCampos();
+        new Menu().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
@@ -225,7 +239,7 @@ public class Disciplina extends javax.swing.JFrame {
 
         DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()), nome.getText(), Integer.parseInt(cargahoraria.getText()),
                 listaUnicaFaculdade.getCodigo_faculdade(), status.getSelectedIndex());
-        
+
         controle.updateDisciplina(disc);
         atualizaTabela();
         limpaCampos();
@@ -233,12 +247,12 @@ public class Disciplina extends javax.swing.JFrame {
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         //DisciplinaBEAN listaDisciplina
-          //      = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
-        
+        //      = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
+
         FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
         listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
         listaUnicaFaculdade = controle.unicaFaculdade(listaUnicaFaculdade);
-        
+
         DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()),
                 listaUnicaFaculdade.getCodigo_faculdade(), 0);
         controle.addDisciplina(disc);
@@ -271,15 +285,29 @@ public class Disciplina extends javax.swing.JFrame {
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
         DisciplinaBEAN disc = new DisciplinaBEAN();
         disc.setNome_disciplina(nome.getText());
-        
-        ArrayList<DisciplinaBEAN> listDisciplina = controle.listaDisciplinaPorNome(disc);        
-        
-        if(listDisciplina.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Disciplina não encontrada!");
-        }else{
+        //disc.setCarga_horaria_disciplina(Integer.parseInt(cargahoraria.getText()));
+        disc.setStatus_disciplina(status.getSelectedIndex());
+        if (faculdadeCombo.getSelectedItem().equals("-")) {
+            //disc.setFk_codigo_faculdade();
+        } else {
+            FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
+            listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
+            listaUnicaFaculdade = controle.unicaFaculdade(listaUnicaFaculdade);
+            disc.setFk_codigo_faculdade(listaUnicaFaculdade.getCodigo_faculdade());
+        }
+
+        ArrayList<DisciplinaBEAN> listDisciplina = controle.listaDisciplinaPorNome(disc);
+
+        if (listDisciplina.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Disciplina não encontrada!");
+        } else {
             preencher_tabela(listDisciplina);
         }
     }//GEN-LAST:event_pesquisaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limpaCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,7 +369,7 @@ public class Disciplina extends javax.swing.JFrame {
     private void preencher_comboBox(List<FaculdadeBEAN> listaFaculdades) {
         faculdadeCombo.removeAllItems();
         try {
-            
+
             for (FaculdadeBEAN facul : listaFaculdades) {
                 faculdadeCombo.addItem(facul.getNome_faculdade());
             }
@@ -367,6 +395,7 @@ public class Disciplina extends javax.swing.JFrame {
     private javax.swing.JTextField codigo;
     private javax.swing.JButton excluir;
     private javax.swing.JComboBox<String> faculdadeCombo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

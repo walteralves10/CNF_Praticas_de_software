@@ -42,6 +42,8 @@ public class Faculdade extends javax.swing.JFrame {
         nome = new javax.swing.JTextField();
         pesquisa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -108,6 +110,20 @@ public class Faculdade extends javax.swing.JFrame {
 
         jLabel2.setText("FACULDADES");
 
+        jButton1.setText("limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Limpar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,12 +136,14 @@ public class Faculdade extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(novo)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(salvar)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(excluir)
-                                .addGap(32, 32, 32)
-                                .addComponent(cancelar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,13 +156,18 @@ public class Faculdade extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(pesquisa))))
                             .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 22, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(275, 275, 275)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addContainerGap(39, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(181, 181, 181)
+                    .addComponent(jButton1)
+                    .addContainerGap(181, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,8 +194,14 @@ public class Faculdade extends javax.swing.JFrame {
                     .addComponent(salvar)
                     .addComponent(excluir)
                     .addComponent(cancelar)
-                    .addComponent(novo))
+                    .addComponent(novo)
+                    .addComponent(jButton2))
                 .addGap(25, 25, 25))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(195, 195, 195)
+                    .addComponent(jButton1)
+                    .addContainerGap(195, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,7 +212,7 @@ public class Faculdade extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -212,8 +241,9 @@ public class Faculdade extends javax.swing.JFrame {
     }//GEN-LAST:event_excluirActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        new Menu().setVisible(true);
         limpaCampos();
+        new Menu().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
@@ -236,6 +266,7 @@ public class Faculdade extends javax.swing.JFrame {
         
         FaculdadeBEAN facul = new FaculdadeBEAN();
         facul.setNome_faculdade(nome.getText());
+        facul.setStatus_faculdade(status.getSelectedIndex());
         
         ArrayList<FaculdadeBEAN> listFaculdade = controle.listaFaculdadesPorNome(facul);        
         
@@ -245,6 +276,15 @@ public class Faculdade extends javax.swing.JFrame {
             preencher_tabela(listFaculdade);
         }
     }//GEN-LAST:event_pesquisaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limpaCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        limpaCampos();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void atualizaTabela() {
         this.modelo = (javax.swing.table.DefaultTableModel) tabela.getModel();
@@ -314,6 +354,8 @@ public class Faculdade extends javax.swing.JFrame {
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField codigo;
     private javax.swing.JButton excluir;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -60,6 +60,7 @@ public class Professores extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +126,13 @@ public class Professores extends javax.swing.JFrame {
 
         jLabel5.setText("PROFESSORES");
 
+        jButton1.setText("Limpar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,12 +151,14 @@ public class Professores extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(novo)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(salvar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(excluir)
-                        .addGap(32, 32, 32)
-                        .addComponent(cancelar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,7 +171,7 @@ public class Professores extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(pesquisa))))
                     .addComponent(jLabel5))
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +202,8 @@ public class Professores extends javax.swing.JFrame {
                     .addComponent(salvar)
                     .addComponent(excluir)
                     .addComponent(cancelar)
-                    .addComponent(novo))
+                    .addComponent(novo)
+                    .addComponent(jButton1))
                 .addGap(29, 29, 29))
         );
 
@@ -203,6 +214,8 @@ public class Professores extends javax.swing.JFrame {
         
         ProfessorBEAN prof = new ProfessorBEAN();
         prof.setNome_professor(nome.getText());
+        prof.setStatus_professor(status.getSelectedIndex());
+        prof.setCpf_professor(cpf.getText());
         
         ArrayList<ProfessorBEAN> listProfessor = controle.listaProfessorPorNome(prof);        
         
@@ -239,8 +252,9 @@ public class Professores extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        new Menu().setVisible(true);
         limpaCampos();
+        new Menu().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
@@ -257,6 +271,11 @@ public class Professores extends javax.swing.JFrame {
         atualizaTabela();
         limpaCampos();
     }//GEN-LAST:event_salvarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        limpaCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,6 +318,7 @@ public class Professores extends javax.swing.JFrame {
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField cpf;
     private javax.swing.JButton excluir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
