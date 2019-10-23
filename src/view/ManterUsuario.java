@@ -147,14 +147,18 @@ public class ManterUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_voltarActionPerformed
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-        if (senha.getText().equals(confirmaSenha.getText())) {
+        if (senha.getText().equals(confirmaSenha.getText()) && !(senha.getText().isEmpty()) ) {
             UsuarioBEAN user = new UsuarioBEAN(email.getText(), senha.getText(), 0);
             controle.addUsuario(user);
             limparCampos();
+        } else if(email.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo e-mail vazio!");
+            email.requestFocus();
         } else {
-            JOptionPane.showMessageDialog(null, "Senhas Diferentes!");
+            JOptionPane.showMessageDialog(null, "campo Senhas Diferentes ou vazias!");
             senha.setText("");
             confirmaSenha.setText("");
+            email.requestFocus();
         }
 
     }//GEN-LAST:event_cadastrarActionPerformed

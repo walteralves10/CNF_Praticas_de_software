@@ -203,10 +203,16 @@ public class Faculdade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        FaculdadeBEAN faculdade = new FaculdadeBEAN(nome.getText(), 0);
-        controle.addFaculdade(faculdade);
-        atualizaTabela();
-        limpaCampos();
+        if (nome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo nome vazio!");
+            nome.requestFocus();
+        } else {
+            FaculdadeBEAN faculdade = new FaculdadeBEAN(nome.getText(), 0);
+            controle.addFaculdade(faculdade);
+            atualizaTabela();
+            limpaCampos();
+            nome.requestFocus();
+        }
     }//GEN-LAST:event_novoActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed

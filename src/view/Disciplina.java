@@ -264,6 +264,12 @@ public class Disciplina extends javax.swing.JFrame {
         //      = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
         if (faculdadeCombo.getSelectedItem().equals("-")) {
             JOptionPane.showMessageDialog(null, "Por favor, selecione uma faculdade");
+        } else if (nome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo nome vazio!");
+            nome.requestFocus();
+        } else if(cargahoraria.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo da carga horaria vazio!");
+            cargahoraria.requestFocus();
         } else {
             FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
             listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
