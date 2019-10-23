@@ -2,9 +2,15 @@ package view;
 
 import Controler.Controle;
 import Model.ProfessorBEAN;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 public class Professores extends javax.swing.JFrame {
 
@@ -16,6 +22,20 @@ public class Professores extends javax.swing.JFrame {
         initComponents();
 
         atualizaTabela();
+        montandoCampos();
+    }
+
+    private void montandoCampos() {
+        try {
+
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            cpf.setValue(null);
+            cpf.setFormatterFactory(new DefaultFormatterFactory(mask));
+        } catch (ParseException ex) {
+            Logger.getLogger(Professores.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }
 
     private void atualizaTabela() {
@@ -45,7 +65,6 @@ public class Professores extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cpf = new javax.swing.JTextField();
         pesquisa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
@@ -61,6 +80,7 @@ public class Professores extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        cpf = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,14 +160,8 @@ public class Professores extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(novo)
@@ -169,9 +183,12 @@ public class Professores extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(pesquisa))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(pesquisa)
+                                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel5))
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,12 +209,14 @@ public class Professores extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cpf)
+                        .addGap(3, 3, 3)))
+                .addGap(9, 9, 9)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar)
                     .addComponent(excluir)
@@ -211,27 +230,36 @@ public class Professores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-        
+
         ProfessorBEAN prof = new ProfessorBEAN();
         prof.setNome_professor(nome.getText());
         prof.setStatus_professor(status.getSelectedIndex());
         prof.setCpf_professor(cpf.getText());
-        
-        ArrayList<ProfessorBEAN> listProfessor = controle.listaProfessorPorNome(prof);        
-        
-        if(listProfessor.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Professor não encontrada!");
-        }else{
+
+        ArrayList<ProfessorBEAN> listProfessor = controle.listaProfessorPorNome(prof);
+
+        if (listProfessor.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Professor não encontrada!");
+        } else {
             preencher_tabela(listProfessor);
         }
-        
+
     }//GEN-LAST:event_pesquisaActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()));
-        controle.deleteProfessor(professores);
-        atualizaTabela();
-        limpaCampos();        
+        if (status.getSelectedIndex() == 0) {
+            ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()));
+            controle.deleteProfessor(professores);
+            atualizaTabela();
+            limpaCampos();
+            novo.setEnabled(true);
+            nome.requestFocus();
+            salvar.setEnabled(false);
+            excluir.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Professor ja excluido!");
+        }
+
     }//GEN-LAST:event_excluirActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
@@ -247,7 +275,9 @@ public class Professores extends javax.swing.JFrame {
         } else {
             this.status.setSelectedIndex(1);
         }
-
+        novo.setEnabled(false);
+        salvar.setEnabled(true);
+        excluir.setEnabled(true);
 
     }//GEN-LAST:event_tabelaMouseClicked
 
@@ -258,23 +288,37 @@ public class Professores extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN(nome.getText(), cpf.getText(), 0);
-        controle.addProfessor(professores);
-        atualizaTabela();
-        limpaCampos();
+        if (cpf.getText().length() < 14) {
+            JOptionPane.showMessageDialog(null, "CPF menor que o permitido");
+            cpf.setText("");
+            cpf.requestFocus();
+        } else {
+            ProfessorBEAN professores = new ProfessorBEAN(nome.getText(), cpf.getText(), 0);
+            controle.addProfessor(professores);
+            atualizaTabela();
+            limpaCampos();
+        }
     }//GEN-LAST:event_novoActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()), 
+        ProfessorBEAN professores = new ProfessorBEAN(Integer.parseInt(codigo.getText()),
                 nome.getText(), cpf.getText(), status.getSelectedIndex());
         controle.updateProfessor(professores);
         atualizaTabela();
         limpaCampos();
+        novo.setEnabled(true);
+        nome.requestFocus();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }//GEN-LAST:event_salvarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         limpaCampos();
+        novo.setEnabled(true);
+        nome.requestFocus();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -316,7 +360,7 @@ public class Professores extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField codigo;
-    private javax.swing.JTextField cpf;
+    private javax.swing.JFormattedTextField cpf;
     private javax.swing.JButton excluir;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -334,9 +378,9 @@ public class Professores extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 public void preencher_tabela(List<ProfessorBEAN> listProfessores) {
 
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(800);
+        tabela.getColumnModel().getColumn(2).setPreferredWidth(600);
         //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
 
         modelo.setNumRows(0);

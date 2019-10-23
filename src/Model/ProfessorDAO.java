@@ -25,6 +25,7 @@ public class ProfessorDAO {
         String query = "INSERT INTO professor(nome_professor, cpf_professor, status_professor) VALUES (?,?,?)";
         return MySQLDAO.executeQuery(query, prof.getNome_professor(), 
                 prof.getCpf_professor(), prof.getStatus_professor());
+        
     }
     
     public void update(ProfessorBEAN prof){
@@ -85,7 +86,10 @@ public class ProfessorDAO {
     public ArrayList<ProfessorBEAN> listaProfessorPorNome(ProfessorBEAN prof){
         ArrayList<ProfessorBEAN> lista = new ArrayList<ProfessorBEAN>();
         ResultSet rs = null;
-        rs = MySQLDAO.getResultSet("SELECT * FROM professor WHERE nome_professor LIKE '%"+prof.getNome_professor()+"%'");
+        rs = MySQLDAO.getResultSet("SELECT * FROM professor "
+                + "WHERE nome_professor LIKE '%"+prof.getNome_professor()+"%'"+" "
+                        + "AND cpf_professor LIKE '%"+prof.getCpf_professor()+"%' "
+                        + "AND status_professor = "+prof.getStatus_professor());
         try {
             while (rs.next()) {
                 lista.add(new ProfessorBEAN(rs.getInt("codigo_professor"), 

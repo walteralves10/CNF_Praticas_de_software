@@ -20,14 +20,14 @@ public class UsuarioDAO {
     }
     
     public long create(UsuarioBEAN usuario){
-        String query = "INSERT INTO USUARIO(status_usuario, senha_usuario, email_usuario) "
+        String query = "INSERT INTO usuario(status_usuario, senha_usuario, email_usuario) "
                 + "VALUES(?,?,?)";
         return MySQLDAO.executeQuery(query, usuario.getStatus_usuario(), usuario.getSenha(), 
                 usuario.getEmail_usuario());
     }
     
     public void update(UsuarioBEAN usuario){
-        String query = "UPDATE USUARIO SET status_usuario=?, senha_usuario=?, "
+        String query = "UPDATE usuario SET status_usuario=?, senha_usuario=?, "
                 + "email_usuario=? WHERE id = ?";
         MySQLDAO.executeQuery(query, usuario.getStatus_usuario(), usuario.getSenha(), 
                 usuario.getEmail_usuario(), usuario.getCodigo());
@@ -38,7 +38,7 @@ public class UsuarioDAO {
     }
     
     public ArrayList<UsuarioBEAN> findAllUsuario(){
-        return listaUsuario("SELECT * FROM USUARIO WHERE status_usuario=0 ORDER BY codigo_usuario");
+        return listaUsuario("SELECT * FROM usuario WHERE status_usuario=0 ORDER BY codigo_usuario");
     }
     
     private ArrayList<UsuarioBEAN> listaUsuario(String query){

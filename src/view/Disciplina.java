@@ -20,6 +20,8 @@ public class Disciplina extends javax.swing.JFrame {
         initComponents();
 
         atualizaTabela();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -226,10 +228,18 @@ public class Disciplina extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-        DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()));
-        controle.deleteDisciplina(disc);
-        atualizaTabela();
-        limpaCampos();
+        if (status.getSelectedIndex() == 0) {
+            DisciplinaBEAN disc = new DisciplinaBEAN(Integer.parseInt(codigo.getText()));
+            controle.deleteDisciplina(disc);
+            atualizaTabela();
+            limpaCampos();
+            novo.setEnabled(true);
+            nome.requestFocus();
+            salvar.setEnabled(false);
+            excluir.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Disciplina já excluida!");
+        }
     }//GEN-LAST:event_excluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
@@ -243,21 +253,28 @@ public class Disciplina extends javax.swing.JFrame {
         controle.updateDisciplina(disc);
         atualizaTabela();
         limpaCampos();
+        novo.setEnabled(true);
+        nome.requestFocus();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }//GEN-LAST:event_salvarActionPerformed
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         //DisciplinaBEAN listaDisciplina
         //      = controle.listaStatusDisciplina(Integer.parseInt(codigo.getText()));
+        if (faculdadeCombo.getSelectedItem().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Por favor, selecione uma faculdade");
+        } else {
+            FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
+            listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
+            listaUnicaFaculdade = controle.unicaFaculdade(listaUnicaFaculdade);
 
-        FaculdadeBEAN listaUnicaFaculdade = new FaculdadeBEAN();
-        listaUnicaFaculdade.setNome_faculdade((String) faculdadeCombo.getSelectedItem());
-        listaUnicaFaculdade = controle.unicaFaculdade(listaUnicaFaculdade);
-
-        DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()),
-                listaUnicaFaculdade.getCodigo_faculdade(), 0);
-        controle.addDisciplina(disc);
-        atualizaTabela();
-        limpaCampos();
+            DisciplinaBEAN disc = new DisciplinaBEAN(nome.getText(), Integer.parseInt(cargahoraria.getText()),
+                    listaUnicaFaculdade.getCodigo_faculdade(), 0);
+            controle.addDisciplina(disc);
+            atualizaTabela();
+            limpaCampos();
+        }
     }//GEN-LAST:event_novoActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
@@ -280,6 +297,9 @@ public class Disciplina extends javax.swing.JFrame {
         }
         this.cargahoraria.setText(String.valueOf(listaDisciplina.getCarga_horaria_disciplina()));
         this.faculdadeCombo.setSelectedItem(listaUnicaFaculdade.getNome_faculdade());
+        novo.setEnabled(false);
+        salvar.setEnabled(true);
+        excluir.setEnabled(true);
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
@@ -307,6 +327,9 @@ public class Disciplina extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         limpaCampos();
+        novo.setEnabled(true);
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -351,8 +374,8 @@ public class Disciplina extends javax.swing.JFrame {
 
     public void preencher_tabela(List<DisciplinaBEAN> listDisciplinas) {
 
-        tabela.getColumnModel().getColumn(0).setPreferredWidth(500);
-        tabela.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabela.getColumnModel().getColumn(1).setPreferredWidth(900);
         //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
         //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
 

@@ -16,6 +16,8 @@ public class Faculdade extends javax.swing.JFrame {
         initComponents();
 
         atualizaTabela();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }
 
     /**
@@ -42,7 +44,6 @@ public class Faculdade extends javax.swing.JFrame {
         nome = new javax.swing.JTextField();
         pesquisa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,13 +111,6 @@ public class Faculdade extends javax.swing.JFrame {
 
         jLabel2.setText("FACULDADES");
 
-        jButton1.setText("limpar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Limpar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,11 +157,6 @@ public class Faculdade extends javax.swing.JFrame {
                             .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(181, 181, 181)
-                    .addComponent(jButton1)
-                    .addContainerGap(181, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,11 +186,6 @@ public class Faculdade extends javax.swing.JFrame {
                     .addComponent(novo)
                     .addComponent(jButton2))
                 .addGap(25, 25, 25))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(195, 195, 195)
-                    .addComponent(jButton1)
-                    .addContainerGap(195, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,18 +210,30 @@ public class Faculdade extends javax.swing.JFrame {
     }//GEN-LAST:event_novoActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()), 
+        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()),
                 nome.getText(), status.getSelectedIndex());
         controle.updateFaculdade(faculdade);
         atualizaTabela();
         limpaCampos();
+        novo.setEnabled(true);
+        nome.requestFocus();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }//GEN-LAST:event_salvarActionPerformed
 
     private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
-        FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()));
-        controle.deleteFaculdade(faculdade);
-        atualizaTabela();
-        limpaCampos();        
+        if (status.getSelectedIndex() == 0) {
+            FaculdadeBEAN faculdade = new FaculdadeBEAN(Integer.parseInt(codigo.getText()));
+            controle.deleteFaculdade(faculdade);
+            atualizaTabela();
+            limpaCampos();
+            novo.setEnabled(true);
+            nome.requestFocus();
+            salvar.setEnabled(false);
+            excluir.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Faculdade já excluida!");
+        }
     }//GEN-LAST:event_excluirActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
@@ -259,31 +255,34 @@ public class Faculdade extends javax.swing.JFrame {
         } else {
             this.status.setSelectedIndex(1);
         }
+        novo.setEnabled(false);
+        salvar.setEnabled(true);
+        excluir.setEnabled(true);
 
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisaActionPerformed
-        
+
         FaculdadeBEAN facul = new FaculdadeBEAN();
         facul.setNome_faculdade(nome.getText());
         facul.setStatus_faculdade(status.getSelectedIndex());
-        
-        ArrayList<FaculdadeBEAN> listFaculdade = controle.listaFaculdadesPorNome(facul);        
-        
-        if(listFaculdade.isEmpty()){
-            JOptionPane.showMessageDialog(null,"Faculdade não encontrada!");
-        }else{
+
+        ArrayList<FaculdadeBEAN> listFaculdade = controle.listaFaculdadesPorNome(facul);
+
+        if (listFaculdade.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faculdade não encontrada!");
+        } else {
             preencher_tabela(listFaculdade);
         }
     }//GEN-LAST:event_pesquisaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        limpaCampos();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         limpaCampos();
+        novo.setEnabled(true);
+        nome.requestFocus();
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void atualizaTabela() {
@@ -354,7 +353,6 @@ public class Faculdade extends javax.swing.JFrame {
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField codigo;
     private javax.swing.JButton excluir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
