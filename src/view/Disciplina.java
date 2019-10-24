@@ -302,6 +302,8 @@ public class Disciplina extends javax.swing.JFrame {
             this.status.setSelectedIndex(1);
         }
         this.cargahoraria.setText(String.valueOf(listaDisciplina.getCarga_horaria_disciplina()));
+        //this.nome.setText(listaUnicaFaculdade.getNome_faculdade());
+        this.faculdadeCombo.addItem(listaUnicaFaculdade.getNome_faculdade());
         this.faculdadeCombo.setSelectedItem(listaUnicaFaculdade.getNome_faculdade());
         novo.setEnabled(false);
         salvar.setEnabled(true);

@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class Usuario extends javax.swing.JFrame {
 
     Controle controle = new Controle();
-    public static final String CAMINHO = "src\\imagens\\";
+    public static final String CAMINHO = "src/imagens/";
 
     public Usuario() {
         initComponents();
