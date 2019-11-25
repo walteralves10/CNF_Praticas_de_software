@@ -23,16 +23,18 @@ public class DisciplinaDAO {
     
     public long create(DisciplinaBEAN disc){
         String query = "INSERT INTO disciplina(nome_disciplina, carga_horaria_disciplina, "
-                + "fk_codigo_faculdade, status_disciplina) VALUES (?,?,?,?)";
+                + "fk_codigo_faculdade, status_disciplina, ultimaAtualizacao) VALUES (?,?,?,?,?)";
         return MySQLDAO.executeQuery(query, disc.getNome_disciplina(), disc.getCarga_horaria_disciplina(),
-                disc.getFk_codigo_faculdade(), disc.getStatus_disciplina());
+                disc.getFk_codigo_faculdade(), disc.getStatus_disciplina(), disc.getUltimaAtualizacao());
     }
     
     public void update(DisciplinaBEAN disc){
         String query = "UPDATE disciplina SET nome_disciplina= ?,carga_horaria_disciplina= ?"
-                + ",fk_codigo_faculdade= ?,status_disciplina= ? WHERE codigo_disciplina = ?";
+                + ",fk_codigo_faculdade= ?,status_disciplina= ?, ultimaAtualizacao=? "
+                + "WHERE codigo_disciplina = ?";
         MySQLDAO.executeQuery(query, disc.getNome_disciplina(), disc.getCarga_horaria_disciplina(),
-                disc.getFk_codigo_faculdade(), disc.getStatus_disciplina(), disc.getCodigo_disciplina());
+                disc.getFk_codigo_faculdade(), disc.getStatus_disciplina(), disc.getCodigo_disciplina(),
+                disc.getUltimaAtualizacao());
     }
     
     public void delete(DisciplinaBEAN disc){
@@ -55,7 +57,10 @@ public class DisciplinaDAO {
                                             rs.getString("nome_disciplina"),
                                             rs.getInt("carga_horaria_disciplina"),
                                             rs.getInt("fk_codigo_faculdade"),
-                                            rs.getInt("status_disciplina")));
+                                            rs.getInt("status_disciplina")
+                        ,
+                                            rs.getString("ultimaAtualizacao")
+                                                    ));
             }
             rs.close();
         } catch (SQLException e) {
@@ -75,7 +80,9 @@ public class DisciplinaDAO {
                                             rs.getString("nome_disciplina"),
                                             rs.getInt("carga_horaria_disciplina"),
                                             rs.getInt("fk_codigo_faculdade"),
-                                            rs.getInt("status_disciplina")));
+                                            rs.getInt("status_disciplina"),
+                                            rs.getString("ultimaAtualizacao")
+                                                    ));
             }
             rs.close();
         } catch (SQLException e) {
@@ -94,7 +101,9 @@ public class DisciplinaDAO {
                                             rs.getString("nome_disciplina"),
                                             rs.getInt("carga_horaria_disciplina"),
                                             rs.getInt("fk_codigo_faculdade"),
-                                            rs.getInt("status_disciplina")));
+                                            rs.getInt("status_disciplina")//,
+                                            //rs.getDate("ultimaAtualizacao")
+                                                    ));
             }
             rs.close();
         } catch (SQLException e) {
@@ -118,7 +127,9 @@ public class DisciplinaDAO {
                                             rs.getString("nome_disciplina"),
                                             rs.getInt("carga_horaria_disciplina"),
                                             rs.getInt("fk_codigo_faculdade"),
-                                            rs.getInt("status_disciplina")));
+                                            rs.getInt("status_disciplina")//,
+                                            //rs.getDate("ultimaAtualizacao")
+                                                    ));
             }
             rs.close();
         } catch (SQLException e) {

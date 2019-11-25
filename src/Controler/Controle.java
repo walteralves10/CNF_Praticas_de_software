@@ -60,6 +60,9 @@ public class Controle {
     public ArrayList<FaculdadeBEAN> listaFaculdades(){
         return FaculdadeDAO.getInstance().findAllFaculdade();
     }
+    public FaculdadeBEAN listaFaculdadesInativas(int codigo){
+        return FaculdadeDAO.getInstance().findAllFaculdadeInativas(codigo);
+    }
     public FaculdadeBEAN listaStatusFaculdade(int codigo){
         return FaculdadeDAO.getInstance().listaStatusFaculdade(codigo);
     }

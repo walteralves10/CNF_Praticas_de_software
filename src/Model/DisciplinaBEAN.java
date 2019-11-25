@@ -1,5 +1,7 @@
 package Model;
 
+import java.sql.Date;
+
 public class DisciplinaBEAN {
 
     private int codigo_disciplina;
@@ -7,6 +9,7 @@ public class DisciplinaBEAN {
     private int carga_horaria_disciplina;
     private int fk_codigo_faculdade;
     private int status_disciplina;
+    private String ultimaAtualizacao;
 
     public DisciplinaBEAN() {
     }
@@ -16,19 +19,32 @@ public class DisciplinaBEAN {
     }
 
     public DisciplinaBEAN(int codigo_disciplina, String nome_disciplina, int carga_horaria_disciplina,
-            int fk_codigo_faculdade, int status_disciplina) {
+            int fk_codigo_faculdade, int status_disciplina, String ultimaAtualizacao) {
         this.codigo_disciplina = codigo_disciplina;
         this.nome_disciplina = nome_disciplina;
         this.carga_horaria_disciplina = carga_horaria_disciplina;
         this.fk_codigo_faculdade = fk_codigo_faculdade;
         this.status_disciplina = status_disciplina;
+        this.ultimaAtualizacao = ultimaAtualizacao;
     }
-
-    public DisciplinaBEAN(String nome_disciplina, int carga_horaria_disciplina, int fk_codigo_faculdade, int status_disciplina) {
+    public DisciplinaBEAN(int codigo_disciplina, String nome_disciplina, int carga_horaria_disciplina,
+            int fk_codigo_faculdade, int status_disciplina
+            //, Date ultimaAtualizacao
+    ) {
+        this.codigo_disciplina = codigo_disciplina;
         this.nome_disciplina = nome_disciplina;
         this.carga_horaria_disciplina = carga_horaria_disciplina;
         this.fk_codigo_faculdade = fk_codigo_faculdade;
         this.status_disciplina = status_disciplina;
+        //this.ultimaAtualizacao = ultimaAtualizacao;
+    }
+
+    public DisciplinaBEAN(String nome_disciplina, int carga_horaria_disciplina, int fk_codigo_faculdade, int status_disciplina, String ultimaAtualizacao) {
+        this.nome_disciplina = nome_disciplina;
+        this.carga_horaria_disciplina = carga_horaria_disciplina;
+        this.fk_codigo_faculdade = fk_codigo_faculdade;
+        this.status_disciplina = status_disciplina;
+        this.ultimaAtualizacao = ultimaAtualizacao;
     }
 
     public int getCodigo_disciplina() {
@@ -70,5 +86,14 @@ public class DisciplinaBEAN {
     public void setStatus_disciplina(int status_disciplina) {
         this.status_disciplina = status_disciplina;
     }
+
+    public String getUltimaAtualizacao() {
+        return ultimaAtualizacao;
+    }
+
+    public void setUltimaAtualizacao(String ultimaAtualizacao) {
+        this.ultimaAtualizacao = ultimaAtualizacao;
+    }
+    
 
 }
