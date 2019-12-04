@@ -41,18 +41,18 @@ public class AuxTurmaAlunoDAO {
           //      + "WHERE codigo_aluno = ?", aluno.getCodigo_aluno());
     }
 
-    public ArrayList<AuxTurmaAlunoBEAN> findAllAluno() {
-        return listaAluno("SELECT * FROM auxturmaaluno");//
+    public ArrayList<AuxTurmaAlunoBEAN> findAllAux() {
+        return listaAux("SELECT * FROM auxturmaaluno");//
     }
 
-    public ArrayList<AuxTurmaAlunoBEAN> listaAluno(String query) {
+    public ArrayList<AuxTurmaAlunoBEAN> listaAux(String query) {
         ArrayList<AuxTurmaAlunoBEAN> lista = new ArrayList<AuxTurmaAlunoBEAN>();
         ResultSet rs = null;
         rs = MySQLDAO.getResultSet(query);
         try {
             while (rs.next()) {
-                //lista.add(new AuxTurmaAlunoBEAN(rs.getObject("fk_codigo_aluno", Class.forName(AlunoBEAN)),//fk_codigo_aluno, fk_codigo_turma
-                  //      rs.getObject("fk_codigo_turma", Class.forName(AlunoBEAN))));
+                lista.add(new AuxTurmaAlunoBEAN(rs.getInt("fk_codigo_aluno"),//fk_codigo_aluno, fk_codigo_turma
+                        rs.getInt("fk_codigo_turma")));
             }
             rs.close();
         } catch (SQLException e) {

@@ -7,6 +7,9 @@ public class AlunoBEAN {
     private String cpf_aluno;
     private int status_aluno;
 
+    public AlunoBEAN() {
+    }
+
     public AlunoBEAN(int codigo_aluno) {
         this.codigo_aluno = codigo_aluno;
     }

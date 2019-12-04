@@ -1,11 +1,17 @@
 package Controler;
 
+import Model.AlunoBEAN;
+import Model.AlunoDAO;
+import Model.AuxTurmaAlunoBEAN;
+import Model.AuxTurmaAlunoDAO;
 import Model.DisciplinaBEAN;
 import Model.DisciplinaDAO;
 import Model.FaculdadeBEAN;
 import Model.FaculdadeDAO;
 import Model.ProfessorBEAN;
 import Model.ProfessorDAO;
+import Model.TurmaBEAN;
+import Model.TurmaDAO;
 import Model.UsuarioBEAN;
 import Model.UsuarioDAO;
 import java.util.ArrayList;
@@ -47,6 +53,7 @@ public class Controle {
     public ArrayList<ProfessorBEAN> listaProfessorPorNome(ProfessorBEAN prof){
         return ProfessorDAO.getInstance().listaProfessorPorNome(prof);
     }
+
     
     public void addFaculdade(FaculdadeBEAN facul){
         FaculdadeDAO.getInstance().create(facul);
@@ -90,5 +97,50 @@ public class Controle {
     }
     public ArrayList<DisciplinaBEAN> listaDisciplinaPorNome(DisciplinaBEAN disc){
         return DisciplinaDAO.getInstance().listaDisciplinaPorNome(disc);
+    }
+    
+    public void addAluno(AlunoBEAN aluno){
+        AlunoDAO.getInstance().create(aluno);
+    }
+    public void updateAluno(AlunoBEAN aluno){
+        AlunoDAO.getInstance().update(aluno);
+    }
+    public void deleteAluno(AlunoBEAN aluno){
+        AlunoDAO.getInstance().delete(aluno);
+    }
+    public ArrayList<AlunoBEAN> listaAluno(){
+        return AlunoDAO.getInstance().findAllAluno();
+    }
+    public ArrayList<AlunoBEAN> listaAlunoPorNome(AlunoBEAN aluno){
+        return AlunoDAO.getInstance().listaAlunoPorNome(aluno);
+    }
+    public AlunoBEAN listaStatusAluno(int codigo){
+        return AlunoDAO.getInstance().listaStatusAluno(codigo);
+    }
+    
+    public void addTurma(TurmaBEAN turma){
+        TurmaDAO.getInstance().create(turma);
+    }
+    public void updateTurma(TurmaBEAN turma){
+        TurmaDAO.getInstance().update(turma);
+    }
+    public void deleteTurma(TurmaBEAN turma){
+        TurmaDAO.getInstance().delete(turma);
+    }
+    public ArrayList<TurmaBEAN> listaTurma(){
+        return TurmaDAO.getInstance().findAllTurma();
+    }
+    
+    public void addAuxTurmaAluno(AuxTurmaAlunoBEAN aux){
+        AuxTurmaAlunoDAO.getInstance().create(aux);
+    }
+    public void updateAuxTurmaAluno(AuxTurmaAlunoBEAN aux){
+        AuxTurmaAlunoDAO.getInstance().update(aux);
+    }
+    public void deleteAuxTurmaAluno(AuxTurmaAlunoBEAN aux){
+        AuxTurmaAlunoDAO.getInstance().delete(aux);
+    }
+    public ArrayList<AuxTurmaAlunoBEAN> listaAuxTurmaAluno(){
+        return AuxTurmaAlunoDAO.getInstance().findAllAux();
     }
 }
