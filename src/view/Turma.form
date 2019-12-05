@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JComboBox" name="faculdadeCombo">
       <Properties>
@@ -96,7 +96,7 @@
                           <Component id="pesquisa" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="faculdadeCombo1" min="-2" pref="207" max="-2" attributes="0"/>
+                          <Component id="disciplinaCombo1" min="-2" pref="207" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -104,9 +104,11 @@
                           </Group>
                       </Group>
                   </Group>
+                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="professorCombo2" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" alignment="0" min="-2" pref="378" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="193" max="32767" attributes="0"/>
+              <EmptySpace pref="223" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,12 +137,16 @@
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="faculdadeCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="disciplinaCombo1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="status1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <Component id="professorCombo2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="154" max="-2" attributes="0"/>
-              <EmptySpace pref="172" max="32767" attributes="0"/>
+              <EmptySpace pref="164" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="salvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="excluir" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -199,7 +205,7 @@
         <Property name="text" type="java.lang.String" value="TURMA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="faculdadeCombo1">
+    <Component class="javax.swing.JComboBox" name="disciplinaCombo1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
@@ -213,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Faculdade"/>
+        <Property name="text" type="java.lang.String" value="Disciplina"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="status1">
@@ -292,5 +298,22 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JComboBox" name="professorCombo2">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="-"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Professor"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

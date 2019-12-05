@@ -37,7 +37,7 @@ public class Turma extends javax.swing.JFrame {
         cancelar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        faculdadeCombo1 = new javax.swing.JComboBox<>();
+        disciplinaCombo1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         status1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -50,6 +50,8 @@ public class Turma extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        professorCombo2 = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         faculdadeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
@@ -98,9 +100,9 @@ public class Turma extends javax.swing.JFrame {
 
         jLabel5.setText("TURMA");
 
-        faculdadeCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+        disciplinaCombo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
-        jLabel7.setText("Faculdade");
+        jLabel7.setText("Disciplina");
 
         status1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVADO", "DESATIVADO" }));
 
@@ -140,6 +142,10 @@ public class Turma extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabela);
 
+        professorCombo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
+
+        jLabel9.setText("Professor");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,13 +181,15 @@ public class Turma extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pesquisa))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(faculdadeCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(disciplinaCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
                                 .addComponent(status1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel9)
+                    .addComponent(professorCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,11 +213,15 @@ public class Turma extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(faculdadeCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(disciplinaCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(status1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addGap(7, 7, 7)
+                .addComponent(professorCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar)
                     .addComponent(excluir)
@@ -386,9 +398,9 @@ public class Turma extends javax.swing.JFrame {
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField codigo1;
     private javax.swing.JTextField codigo2;
+    private javax.swing.JComboBox<String> disciplinaCombo1;
     private javax.swing.JButton excluir;
     private javax.swing.JComboBox<String> faculdadeCombo;
-    private javax.swing.JComboBox<String> faculdadeCombo1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -398,9 +410,11 @@ public class Turma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton novo;
     private javax.swing.JButton pesquisa;
+    private javax.swing.JComboBox<String> professorCombo2;
     private javax.swing.JButton salvar;
     private javax.swing.JComboBox<String> status;
     private javax.swing.JComboBox<String> status1;
