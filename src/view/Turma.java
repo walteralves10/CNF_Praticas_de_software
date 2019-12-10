@@ -201,6 +201,11 @@ public class Turma extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tabelaAlunos);
 
         add.setText(">>");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
 
         remove.setText("<<");
 
@@ -458,6 +463,14 @@ public class Turma extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tabelaAlunosMouseClicked
 
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        // TODO add your handling code here:
+        int linhaEditora = tabela.getSelectedRow();
+
+        this.codigo.setText(tabela.getValueAt(linhaEditora, 0).toString());
+        this.semestre.setText(tabela.getValueAt(linhaEditora, 1).toString());
+    }//GEN-LAST:event_addActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -550,12 +563,12 @@ public class Turma extends javax.swing.JFrame {
         tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(400);
         tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
-        //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
+        
 
         modelo.setNumRows(0);
         try {
             for (TurmaBEAN turma : listTurma) {
-                //modelo.addRow(new Object[]{disc.getCodigo_disciplina(), disc.getNome_disciplina(), disc.getUltimaAtualizacao()});
+                
                 modelo.addRow(new Object[]{turma.getCodigo_turma(), turma.getSemestre_turma(), turma.getAno_turma()});
             }
         } catch (Exception erro) {
