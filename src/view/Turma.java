@@ -29,6 +29,7 @@ public class Turma extends javax.swing.JFrame {
     public Turma() {
         initComponents();
         atualizaTabela();
+        atualizaTabelaAluno();
     }
 
     /**
@@ -619,11 +620,11 @@ public class Turma extends javax.swing.JFrame {
         //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
         //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
 
-        modelo.setNumRows(0);
+        modeloAluno.setNumRows(0);
         try {
             for (AlunoBEAN aluno : listAluno) {
                 //modelo.addRow(new Object[]{disc.getCodigo_disciplina(), disc.getNome_disciplina(), disc.getUltimaAtualizacao()});
-                modelo.addRow(new Object[]{aluno.getNome_aluno()});
+                modeloAluno.addRow(new Object[]{aluno.getNome_aluno()});
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);

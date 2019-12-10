@@ -24,7 +24,7 @@ public class TurmaDAO {
     public long create(TurmaBEAN turma) {
         String query = "INSERT INTO turma(fk_codigo_disciplina,"
                 + " fk_codigo_professor, semestre_turma, "
-                + "ano_turma, status_turma) VALUES (?,?,?)";
+                + "ano_turma, status_turma) VALUES (?,?,?,?,?)";
         return MySQLDAO.executeQuery(query, 
                 turma.getFk_codigo_disciplina(), 
                 turma.getFk_codigo_professor(), 

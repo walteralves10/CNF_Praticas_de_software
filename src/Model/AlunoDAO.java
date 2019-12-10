@@ -22,7 +22,7 @@ public class AlunoDAO {
     }
 
     public long create(AlunoBEAN aluno) {
-        String query = "INSERT INTO aluno(nome_aluno, cpf_aluno, status_aluno) VALUES (?,?,?)";
+        String query = "INSERT INTO aluno (nome_aluno, cpf_aluno, status_aluno) VALUES (?,?,?)";
         return MySQLDAO.executeQuery(query, aluno.getNome_aluno(),
                 aluno.getCpf_aluno(), aluno.getStatus_aluno());
 
