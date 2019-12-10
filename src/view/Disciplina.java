@@ -469,8 +469,7 @@ public class Disciplina extends javax.swing.JFrame {
         faculdadeCombo.removeAllItems();
         try {
 
-            
-                faculdadeCombo.addItem(facul.getNome_faculdade());
+            faculdadeCombo.addItem(facul.getNome_faculdade());
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + e);
@@ -479,8 +478,6 @@ public class Disciplina extends javax.swing.JFrame {
     private void preencher_comboAtivo(FaculdadeBEAN facul) {
         faculdadeCombo.removeAllItems();
         try {
-
-            
                 faculdadeCombo.addItem(facul.getNome_faculdade());
             
         } catch (Exception e) {

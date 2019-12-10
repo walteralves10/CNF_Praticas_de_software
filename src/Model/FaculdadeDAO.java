@@ -119,7 +119,7 @@ public class FaculdadeDAO {
         return lista;
     }
 
-    //unicaFaculdade
+    //unicaDisciplina
     public FaculdadeBEAN unicaFaculdade(FaculdadeBEAN facul) {
         FaculdadeBEAN lista = null;
         ResultSet rs = null;

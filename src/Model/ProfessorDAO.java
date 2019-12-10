@@ -103,4 +103,23 @@ public class ProfessorDAO {
         }
         return lista;
     }
+    
+    //unicoProfessor
+    public ProfessorBEAN unicoProfessor(ProfessorBEAN prof) {
+        ProfessorBEAN lista = null;
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM professor WHERE nome_professor = '" + prof.getNome_professor() + "'");
+        try {
+            while (rs.next()) {
+                lista = (new ProfessorBEAN(rs.getInt("codigo_professor"), 
+                                            rs.getString("nome_professor"), 
+                                            rs.getString("cpf_professor"), 
+                                            rs.getInt("status_professor")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

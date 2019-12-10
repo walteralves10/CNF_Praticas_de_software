@@ -137,4 +137,26 @@ public class DisciplinaDAO {
         }
         return lista;
     }
+    
+    //unicaDisciplina
+    public DisciplinaBEAN unicaDisciplina(DisciplinaBEAN disc) {
+        DisciplinaBEAN lista = null;
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM disciplina WHERE nome_disciplina = '" + disc.getNome_disciplina() + "'");
+        try {
+            while (rs.next()) {
+                lista = (new DisciplinaBEAN(rs.getInt("codigo_disciplina"), 
+                                            rs.getString("nome_disciplina"),
+                                            rs.getInt("carga_horaria_disciplina"),
+                                            rs.getInt("fk_codigo_faculdade"),
+                                            rs.getInt("status_disciplina")//,
+                                            //rs.getDate("ultimaAtualizacao")
+                                                    ));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

@@ -53,7 +53,9 @@ public class Controle {
     public ArrayList<ProfessorBEAN> listaProfessorPorNome(ProfessorBEAN prof){
         return ProfessorDAO.getInstance().listaProfessorPorNome(prof);
     }
-
+    public ProfessorBEAN unicoProfessor(ProfessorBEAN nome){
+        return ProfessorDAO.getInstance().unicoProfessor(nome);
+    }
     
     public void addFaculdade(FaculdadeBEAN facul){
         FaculdadeDAO.getInstance().create(facul);
@@ -98,6 +100,9 @@ public class Controle {
     public ArrayList<DisciplinaBEAN> listaDisciplinaPorNome(DisciplinaBEAN disc){
         return DisciplinaDAO.getInstance().listaDisciplinaPorNome(disc);
     }
+    public DisciplinaBEAN unicaDisciplina(DisciplinaBEAN nome){
+        return DisciplinaDAO.getInstance().unicaDisciplina(nome);
+    }
     
     public void addAluno(AlunoBEAN aluno){
         AlunoDAO.getInstance().create(aluno);
@@ -129,6 +134,12 @@ public class Controle {
     }
     public ArrayList<TurmaBEAN> listaTurma(){
         return TurmaDAO.getInstance().findAllTurma();
+    }
+    public ArrayList<TurmaBEAN> listaTurmaPorAno(TurmaBEAN turma){
+        return TurmaDAO.getInstance().listaTurmaPorAno(turma);
+    }
+    public TurmaBEAN listaStatusTurma(int codigo){
+        return TurmaDAO.getInstance().listaStatusTurma(codigo);
     }
     
     public void addAuxTurmaAluno(AuxTurmaAlunoBEAN aux){

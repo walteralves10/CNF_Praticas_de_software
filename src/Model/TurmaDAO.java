@@ -77,5 +77,46 @@ public class TurmaDAO {
         }
         return lista;
     }
+    
+        public ArrayList<TurmaBEAN> listaTurmaPorAno(TurmaBEAN turma){
+        ArrayList<TurmaBEAN> lista = new ArrayList<TurmaBEAN>();
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM turma "
+                + "WHERE ano_turma = "+ turma.getAno_turma());
+        try {
+            while (rs.next()) {
+                lista.add(new TurmaBEAN(rs.getInt("codigo_turma"),
+                        rs.getInt("fk_codigo_disciplina"),
+                        rs.getInt("fk_codigo_professor"),
+                        rs.getInt("semestre_turma"),
+                        rs.getInt("ano_turma"),
+                        rs.getInt("status_turma")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 
+    //listaStatusTurma
+    public TurmaBEAN listaStatusTurma(int codigo){
+        TurmaBEAN result = null;
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT * FROM turma WHERE codigo_turma="+codigo);
+        try {
+            while (rs.next()) {
+                result = (new TurmaBEAN(rs.getInt("codigo_turma"),
+                        rs.getInt("fk_codigo_disciplina"),
+                        rs.getInt("fk_codigo_professor"),
+                        rs.getInt("semestre_turma"),
+                        rs.getInt("ano_turma"),
+                        rs.getInt("status_turma")));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }        
 }

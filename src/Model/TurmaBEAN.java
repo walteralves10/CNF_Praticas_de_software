@@ -9,6 +9,9 @@ public class TurmaBEAN {
     private int ano_turma;
     private int status_turma;
 
+    public TurmaBEAN() {
+    }
+
     public TurmaBEAN(int codigo_turma) {
         this.codigo_turma = codigo_turma;
     }
