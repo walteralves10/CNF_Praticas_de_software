@@ -141,9 +141,12 @@ public class Controle {
     public TurmaBEAN listaStatusTurma(int codigo){
         return TurmaDAO.getInstance().listaStatusTurma(codigo);
     }
+    public int listaUltimaTurma(){
+        return TurmaDAO.getInstance().listaUltimaTurma();
+    }
     
-    public void addAuxTurmaAluno(AuxTurmaAlunoBEAN aux){
-        AuxTurmaAlunoDAO.getInstance().create(aux);
+    public void addAuxTurmaAluno(int maximo, int aluno){
+        AuxTurmaAlunoDAO.getInstance().create(maximo, aluno);
     }
     public void updateAuxTurmaAluno(AuxTurmaAlunoBEAN aux){
         AuxTurmaAlunoDAO.getInstance().update(aux);
@@ -151,7 +154,7 @@ public class Controle {
     public void deleteAuxTurmaAluno(AuxTurmaAlunoBEAN aux){
         AuxTurmaAlunoDAO.getInstance().delete(aux);
     }
-    public ArrayList<AuxTurmaAlunoBEAN> listaAuxTurmaAluno(){
-        return AuxTurmaAlunoDAO.getInstance().findAllAux();
+    public ArrayList<AuxTurmaAlunoBEAN> listaAuxTurmaAluno(int id){
+        return AuxTurmaAlunoDAO.getInstance().findAllAux(id);
     }
 }

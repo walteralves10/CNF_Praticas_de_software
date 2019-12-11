@@ -119,4 +119,22 @@ public class TurmaDAO {
         }
         return result;
     }        
+    
+    public int listaUltimaTurma(){
+        
+        int result = 0;
+        
+        ResultSet rs = null;
+        rs = MySQLDAO.getResultSet("SELECT max(codigo_turma) FROM turma");
+        try {
+            while(rs.next()){
+                result = rs.getInt("max(codigo_turma)");
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return result;
+    }
 }

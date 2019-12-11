@@ -23,9 +23,9 @@ public class AuxTurmaAlunoDAO {
         return instance;
     }
 
-    public long create(AuxTurmaAlunoBEAN aux) {
+    public long create(int maximo, int aluno) {
         String query = "INSERT INTO auxturmaaluno(fk_codigo_aluno, fk_codigo_turma) VALUES (?,?)";
-        return MySQLDAO.executeQuery(query, aux.getFk_codigo_aluno(), aux.getFk_codigo_turma());
+        return MySQLDAO.executeQuery(query, aluno, maximo);
 
     }
 
@@ -41,8 +41,8 @@ public class AuxTurmaAlunoDAO {
           //      + "WHERE codigo_aluno = ?", aluno.getCodigo_aluno());
     }
 
-    public ArrayList<AuxTurmaAlunoBEAN> findAllAux() {
-        return listaAux("SELECT * FROM auxturmaaluno");//
+    public ArrayList<AuxTurmaAlunoBEAN> findAllAux(int id) {
+        return listaAux("SELECT * FROM auxturmaaluno WHERE fk_codigo_turma ="+id);//
     }
 
     public ArrayList<AuxTurmaAlunoBEAN> listaAux(String query) {

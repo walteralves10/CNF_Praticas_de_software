@@ -7,13 +7,20 @@ package view;
 
 import Controler.Controle;
 import Model.AlunoBEAN;
+import Model.AuxTurmaAlunoBEAN;
 import Model.DisciplinaBEAN;
 import Model.FaculdadeBEAN;
 import Model.ProfessorBEAN;
 import Model.TurmaBEAN;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -25,11 +32,20 @@ public class Turma extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel modeloAluno;
     javax.swing.table.DefaultTableModel modeloTurmaAluno;
     Controle controle = new Controle();
+    private int idAluno[]; 
+    private String nomeAluno[]; 
+    private int cont;
 
     public Turma() {
         initComponents();
+        
+        montandoCampos();
         atualizaTabela();
         atualizaTabelaAluno();
+        idAluno = new int[1000];
+        nomeAluno = new String[1000];
+        cont = 0;
+        
     }
 
     /**
@@ -152,7 +168,7 @@ public class Turma extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Turma Aluno"
+                "id", "Turma Aluno"
             }
         ));
         tabelaTurmaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,6 +177,9 @@ public class Turma extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tabelaTurmaAluno);
+        if (tabelaTurmaAluno.getColumnModel().getColumnCount() > 0) {
+            tabelaTurmaAluno.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         professorCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
@@ -190,7 +209,7 @@ public class Turma extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Alunos"
+                "id", "Alunos"
             }
         ));
         tabelaAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -208,6 +227,11 @@ public class Turma extends javax.swing.JFrame {
         });
 
         remove.setText("<<");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -339,6 +363,17 @@ public class Turma extends javax.swing.JFrame {
             TurmaBEAN turma = new TurmaBEAN(unicaDisc.getCodigo_disciplina(), unicoProf.getCodigo_professor(),
                     Integer.parseInt(semestre.getText()), Integer.parseInt(ano.getText()), 0);
             controle.addTurma(turma);
+            
+            int auxMaximoCodigoTurma = controle.listaUltimaTurma();
+            
+//            System.out.println(auxMaximoCodigoTurma);
+            
+            for(int i=0; i <= cont; i++){
+                if(idAluno[i] != 0){
+                    controle.addAuxTurmaAluno(auxMaximoCodigoTurma, idAluno[i]);
+                }
+            }
+            
             atualizaTabela();
             limpaCampos();
         }
@@ -452,7 +487,10 @@ public class Turma extends javax.swing.JFrame {
 
         this.semestre.setText(String.valueOf(listaTurma.getSemestre_turma()));
         this.ano.setText(String.valueOf(listaTurma.getAno_turma()));
-        System.out.println(tabela.getValueAt(linhaEditora, 2).toString());
+        
+        ArrayList<AuxTurmaAlunoBEAN> listAux = controle.listaAuxTurmaAluno(Integer.parseInt(tabela.getValueAt(linhaEditora, 0).toString()));
+        
+        atualizaTabelaTurma(listAux);
 
         novo.setEnabled(false);
         salvar.setEnabled(true);
@@ -465,11 +503,50 @@ public class Turma extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-        int linhaEditora = tabela.getSelectedRow();
+        this.modeloTurmaAluno = (javax.swing.table.DefaultTableModel) tabelaTurmaAluno.getModel();
+        
+        int linhaEditora = tabelaAlunos.getSelectedRow();
+        //System.out.println(tabelaAlunos.getValueAt(linhaEditora, 0).toString());
+        //System.out.println(tabelaAlunos.getValueAt(linhaEditora, 1).toString());
+        
+        int auxID = Integer.parseInt(tabelaAlunos.getValueAt(linhaEditora, 0).toString());
+        idAluno[cont] = auxID;
+        
+        if (cont <= 0){
+            modeloTurmaAluno.setNumRows(0);
+        }
+        
+        
+        tabelaTurmaAluno.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabelaTurmaAluno.getColumnModel().getColumn(1).setPreferredWidth(400);
+        //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
+        //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
 
-        this.codigo.setText(tabela.getValueAt(linhaEditora, 0).toString());
-        this.semestre.setText(tabela.getValueAt(linhaEditora, 1).toString());
+        
+        try {
+                modeloTurmaAluno.addRow(new Object[]{tabelaAlunos.getValueAt(linhaEditora, 0).toString(),
+                    tabelaAlunos.getValueAt(linhaEditora, 1).toString()});
+        
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
+        }
+        cont++;
     }//GEN-LAST:event_addActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        // TODO add your handling code here:
+        int linhaEditora = tabelaTurmaAluno.getSelectedRow();
+
+        //System.out.println(tabelaTurmaAluno.getValueAt(linhaEditora, 0).toString());
+        int auxID = Integer.parseInt(tabelaTurmaAluno.getValueAt(linhaEditora, 0).toString());
+        for(int i=0;i <= cont;i++){
+            if(idAluno[i] == auxID){
+                idAluno[i] = 0;
+            }
+        }
+        
+        ((DefaultTableModel) tabelaTurmaAluno.getModel()).removeRow(tabelaTurmaAluno.getSelectedRow());
+    }//GEN-LAST:event_removeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -540,9 +617,17 @@ public class Turma extends javax.swing.JFrame {
     private javax.swing.JTable tabelaTurmaAluno;
     // End of variables declaration//GEN-END:variables
 
+    private void montandoCampos() {
+        
+        salvar.setEnabled(false);
+        excluir.setEnabled(false);
+    }
+    
     private void limpaCampos() {
         semestre.setText("");
         ano.setText("");
+        tabelaTurmaAluno.removeAll();
+        modeloTurmaAluno.setNumRows(0);
     }
 
     private void atualizaTabela() {
@@ -621,6 +706,7 @@ public class Turma extends javax.swing.JFrame {
 
     private void atualizaTabelaAluno() {
         this.modeloAluno = (javax.swing.table.DefaultTableModel) tabelaAlunos.getModel();
+        
 
         List<AlunoBEAN> listaAlunos = controle.listaAluno();
         preencher_tabelaAlunos(listaAlunos);
@@ -628,19 +714,37 @@ public class Turma extends javax.swing.JFrame {
 
     public void preencher_tabelaAlunos(List<AlunoBEAN> listAluno) {
 
-        tabelaAlunos.getColumnModel().getColumn(0).setPreferredWidth(400);
-        //tabela.getColumnModel().getColumn(1).setPreferredWidth(400);
+        tabelaAlunos.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabelaAlunos.getColumnModel().getColumn(1).setPreferredWidth(400);
         //tabela.getColumnModel().getColumn(2).setPreferredWidth(500);
         //tabela.getColumnModel().getColumn(3).setPreferredWidth(500);
-
+        
         modeloAluno.setNumRows(0);
         try {
             for (AlunoBEAN aluno : listAluno) {
-                //modelo.addRow(new Object[]{disc.getCodigo_disciplina(), disc.getNome_disciplina(), disc.getUltimaAtualizacao()});
-                modeloAluno.addRow(new Object[]{aluno.getNome_aluno()});
+                
+                modeloAluno.addRow(new Object[]{aluno.getCodigo_aluno(), aluno.getNome_aluno()});
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
         }
+    }
+
+    private void atualizaTabelaTurma(ArrayList<AuxTurmaAlunoBEAN> listAux) {
+        this.modeloTurmaAluno = (javax.swing.table.DefaultTableModel) tabelaTurmaAluno.getModel();
+        
+        tabelaTurmaAluno.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabelaTurmaAluno.getColumnModel().getColumn(1).setPreferredWidth(400);
+        
+        modeloTurmaAluno.setNumRows(0);
+        try {
+            for (AuxTurmaAlunoBEAN aux : listAux) {
+                
+                modeloTurmaAluno.addRow(new Object[]{aux.getFk_codigo_aluno()});
+            }
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar dados - " + erro);
+        }
+        
     }
 }
